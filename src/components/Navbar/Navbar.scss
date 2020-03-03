@@ -1,0 +1,27 @@
+.section-menu {
+  background-color:rgba(24, 22, 38, .4);
+  &-li {
+    list-style: none;
+    a{
+      text-decoration: none;
+    }
+    &-url {
+      color: #e73931;
+      transition: 0.3s;
+      background-color: transparent;
+      display: block;
+      padding: 12px 15px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+    }
+    &-url:hover {
+      background: #e73931;
+      color: #ffffff;
+      border-bottom: 1px solid #e73931;
+    }
+    &-url.active {
+      background: #e73931;
+      color: #ffffff;
+      border-bottom: 1px solid #e73931;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+.section-dialogs {
+  &-inner {
+    &-active {
+      &-message {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: rgba(147, 112, 216, 0.4);
+        border-radius: 15px;
+        .row {
+          display: flex;
+          align-items: center;
+        }
+        &-avatar {
+          img {
+            width: 100%;
+          }
+        }
+        &-item {
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}

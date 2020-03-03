@@ -1,0 +1,88 @@
+.liprofile {
+  color: rgb(0, 0, 0);
+  margin-right: 10px;
+  text-shadow: 1px 1px 1px #ffffff;
+  font-weight: 700;
+}
+
+.fill-svg {
+  filter: invert(25%) sepia(77%) saturate(1962%) hue-rotate(333deg)
+    brightness(79%) contrast(101%);
+}
+
+.section-profile {
+  background-color: transparent;
+  &-inner {
+    &-about {
+      width: 100%;
+      background: rgb(69, 44, 52);
+      background: linear-gradient(
+        90deg,
+        rgba(69, 44, 52, 1) 0%,
+        rgb(121, 9, 9) 35%,
+        rgba(184, 37, 48, 1) 100%
+      );
+      border-radius: 15px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      &-avatar {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      &-description {
+        color: #000000;
+        &-main {
+          padding: 15px;
+          margin-bottom: 15px;
+          background-color: #ffffff;
+          border-radius: 15px;
+          &-name {
+            color: #000000;
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+          }
+          &-status {
+            color: #000000;
+          }
+        }
+        &-about {
+          display: flex;
+          align-items: center;
+          background-color: #ffffff;
+          border-radius: 15px;
+          margin-top: 15px;
+          padding: 10px;
+        }
+        &-job {
+          display: flex;
+          flex-direction: column;
+          background-color: #ffffff;
+          border-radius: 15px;
+          margin-top: 15px;
+          padding: 10px;
+          justify-content: center;
+          &-looking {
+            display: flex;
+            align-items: center;
+          }
+        }
+        &-contacts {
+          background-color: #ffffff;
+          border-radius: 15px;
+          padding: 10px;
+          margin-top: 15px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          img {
+            max-width: 50px;
+            max-height: 50px;
+          }
+        }
+      }
+    }
+  }
+}

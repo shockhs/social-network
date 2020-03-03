@@ -1,0 +1,79 @@
+.section-profile {
+  &-inner {
+    &-posts {
+      .col-sm-3 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      &-form {
+        background: rgb(69, 44, 52);
+        background: linear-gradient(
+          90deg,
+          rgba(69, 44, 52, 1) 0%,
+          rgba(121, 9, 9, 1) 35%,
+          rgba(184, 37, 48, 1) 100%
+        );
+        border-radius: 15px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 10px;
+        &-area {
+          &-input {
+            padding: 10px;
+            outline: none;
+            font-size: 14px;
+            width: 100%;
+            display: block;
+            border-radius: 10px;
+            border: 6px solid #556677;
+            overflow: hidden;
+          }
+        }
+        &-functions {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          &-button + &-button {
+            margin-top: 15px;
+          }
+          &-button {
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 0;
+            font-weight: 400;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            touch-action: manipulation;
+            background-image: none;
+            font-size: 16px;
+            line-height: 1.42857143;
+            -webkit-user-select: none;
+            user-select: none;
+            color: #ffffff;
+            padding: 6px 12px;
+            outline: none;
+            background-color: transparent;
+            outline: none;
+            margin-left: 10px;
+            border: 1px solid #ffffff;
+            border-radius: 6px;
+          }
+          &-button:focus {
+            box-shadow: none !important;
+            outline: none;
+          }
+          &-button:hover {
+            color: #7c13d7;
+            outline: none;
+            margin-left: 10px;
+            border: 1px solid #ffffff;
+            background-color: #ffffff;
+            border-radius: 6px;
+          }
+        }
+      }
+    }
+  }
+}
