@@ -30,6 +30,20 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
+        button {
+          margin-top: 10px;
+          font-weight: 600;
+          color: #ffffff;
+          border: none;
+          background: rgb(113, 8, 199);
+          background: radial-gradient(
+            circle,
+            rgba(113, 8, 199, 1) 0%,
+            rgba(0, 0, 0, 1) 100%
+          );
+          border-radius: 10px;
+        }
       }
       &-description {
         color: #000000;

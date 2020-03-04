@@ -9,26 +9,20 @@ import instagram from '../../../img/icons/instagram.svg';
 import website from '../../../img/icons/website.svg';
 import mainlink from '../../../img/icons/mainlink.svg';
 import github from '../../../img/icons/github.svg';
-import avatar from '../../../img/default-avatar.png';
 import StatusContainer from './Status/StatusContainer';
+import AvatarContainer from './Avatar/AvatarContainer';
 
-const ProfileInfo = ({ profile, isLoading, authId, setUserProfileStatusThunk }) => {
+const ProfileInfo = ({ profile, isLoading, authId }) => {
     if (!profile) {
         return <Preloader />
     }
-    let giveAvatar = () => {
-        if (profile.photos.large === null) {
-            return avatar;
-        } else {
-            return profile.photos.large;
-        }
-    }
+    let authStatus = (authId === profile.userId);
     return (
         <div className="section-profile-inner-about">
             {(isLoading) ? <div className="col-sm-2 col-sm-offset-5"><Preloader isLoading={isLoading} /></div> :
                 <div className="row">
                     <div className="col-sm-4 section-profile-inner-about-avatar">
-                        <img src={giveAvatar()} alt="" className="img-responsive img-circle" />
+                        <AvatarContainer authStatus={authStatus} photo={profile.photos.large} />
                     </div>
                     <div className="col-sm-8">
                         <div className="row">
@@ -38,7 +32,7 @@ const ProfileInfo = ({ profile, isLoading, authId, setUserProfileStatusThunk }) 
                                         <h1>{profile.fullName}</h1>
                                     </div>
                                     <div className="section-profile-inner-about-description-main-status">
-                                        <StatusContainer authId={authId} id={profile.userId}/>
+                                        <StatusContainer authStatus={authStatus}/>
                                     </div>
                                 </div>
                                 <div className="section-profile-inner-about-description-about col-sm-12">

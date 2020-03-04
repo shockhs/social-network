@@ -13,6 +13,14 @@ export const getStatus = (userId) => {
     )
 }
 
+export const setPhoto = (photo) => {
+    const formData = new FormData();
+    formData.append('image', photo);
+    return instance.put('profile/photo', formData, {
+        'Content-Type': 'multipart/form-data'
+    })
+}
+
 export const getUserProfile = (userId) => {
     return instance.get(`profile/${userId}`)
         .then(response => response.data)

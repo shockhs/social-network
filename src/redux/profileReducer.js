@@ -1,10 +1,11 @@
-import { getUserProfile, getStatus, setStatus } from '../api/API-profile';
+import { getUserProfile, getStatus, setStatus, setPhoto } from '../api/API-profile';
 
 const ADD_POST = "profileReducer/ADD-POST";
 const DELETE_POST = "profileReducer/DELETE-POST";
 const SET_USER_PROFILE = "profileReducer/SET-USER-PROFILE";
 const SET_LOADING_STATUS = "profileReducer/SET-LOADING-STATUS";
 const SET_PROFILE_STATUS = "profileReducer/SET-PROFILE-STATUS";
+const SET_AVATAR = "profileReducer/SET-AVATAR";
 
 
 let initialState = {
@@ -35,6 +36,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state, isLoading: action.status
             };
         }
+        case SET_AVATAR: {
+            return {
+                ...state, profile: {...state.profile, photos: action.photos}
+            };
+        }
         case DELETE_POST: {
             return {
                 ...state, postsData: [...state.postsData.filter(post => post.id !== action.id)]
@@ -51,9 +57,20 @@ const profileReducer = (state = initialState, action) => {
 
 export let addPostActionCreater = (post) => ({ type: ADD_POST, post });
 export let setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
+export let setUpdatedAvatar = (photos) => ({ type: SET_AVATAR, photos })
 export let setPreloader = (status) => ({ type: SET_LOADING_STATUS, status });
 export let setProfileStatus = (status) => ({ type: SET_PROFILE_STATUS, status });
 export let deletePostActionCreater = (id) => ({ type: DELETE_POST, id });
+
+export let updateUserProfileAvatar = (photo) => {
+    debugger;
+    return async (dispatch) => {
+        let response = await setPhoto(photo)
+        if (response.data.resultCode === 0) {
+            dispatch(setUpdatedAvatar(response.data.data.photos));
+        }
+    }
+}
 
 export let getUserProfileThunk = (userId) => {
     return async (dispatch) => {

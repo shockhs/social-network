@@ -14,6 +14,10 @@ export const getProfileStatus = (state) => {
 export const getPosts = (state) => {
     return state.profilePage.postsData;
 }
+export const getProfilePhotos = (state) => {
+    return state.profilePage.profile.photos;
+}
+
 
 export const getAuthLogin = (state) => {
     return state.authPage;

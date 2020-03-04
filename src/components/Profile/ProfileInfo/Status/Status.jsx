@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Status = ({ authId, id, status, setUserProfileStatusThunk }) => {
-    debugger;
+const Status = ({ authStatus, status, setUserProfileStatusThunk }) => {
     let [currentStatus, setCurrentStatus] = useState(status);
     let [editMode, setEditMode] = useState(false);
 
@@ -25,7 +24,7 @@ const Status = ({ authId, id, status, setUserProfileStatusThunk }) => {
 
     return (
         <div>
-            {(editMode && (id === authId))
+            {(editMode && (authStatus))
                 ? <input onChange={changeCurrentStatus} autoFocus={true} onBlur={changeCurrentMode} value={currentStatus}></input>
                 : <span onClick={changeCurrentMode}>{currentStatus || "No status here"}</span>}
         </div>
