@@ -11,7 +11,7 @@ import { BrowserRouter } from 'react-router-dom';
 import FunctionRender from './App';
 
 ReactDOM.render(
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Provider store={store}>
             <FunctionRender />
         </Provider>
