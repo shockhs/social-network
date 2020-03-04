@@ -62,10 +62,10 @@ export let setPreloader = (status) => ({ type: SET_LOADING_STATUS, status });
 export let setProfileStatus = (status) => ({ type: SET_PROFILE_STATUS, status });
 export let deletePostActionCreater = (id) => ({ type: DELETE_POST, id });
 
-export let updateUserProfileAvatar = (photo) => {
+export let updateUserProfileAvatar = (avatar) => {
     debugger;
     return async (dispatch) => {
-        let response = await setPhoto(photo)
+        let response = await setPhoto(avatar)
         if (response.data.resultCode === 0) {
             dispatch(setUpdatedAvatar(response.data.data.photos));
         }

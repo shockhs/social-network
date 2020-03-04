@@ -1,6 +1,5 @@
 import React from 'react';
-//import '../css/News/News.css';
-import './News.scss';
+import '../css/News/News.css';
 import blocker from '../../img/news-blocker.jpg'
 
 const News = (props) =>{
