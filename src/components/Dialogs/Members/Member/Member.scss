@@ -1,0 +1,30 @@
+.section-dialogs {
+  &-inner {
+    &-members {
+      &-li {
+        list-style: none;
+        a {
+          text-decoration: none;
+        }
+        &-url {
+          color: #7c13d7;
+          transition: 0.3s;
+          background-color: transparent;
+          display: block;
+          padding: 12px 15px;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+        }
+        &-url:hover {
+          background: #7c13d7;
+          color: #ffffff;
+          border-bottom: 1px solid #7c13d7;
+        }
+        &-url.active {
+          background: #7c13d7;
+          color: #ffffff;
+          border-bottom: 1px solid #7c13d7;
+        }
+      }
+    }
+  }
+}
