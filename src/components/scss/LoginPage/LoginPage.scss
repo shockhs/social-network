@@ -19,11 +19,11 @@
     }
     button:hover {
       background-color: #e73931;
+      outline: none;
     }
     button:focus {
       background-color: #e73931;
-      outline-color: #ffffff;
-      outline-width: 3px;
+      outline: none;
     }
   }
 }
@@ -32,6 +32,21 @@
   color: red;
   font-weight: 600;
   font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.captchaLogin {
+  margin-bottom: 10px;
+}
+
+.captchaInput{
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 200px;
+  span {
+    margin: 0 auto;
+  }
 }
 
 .section-login {
@@ -66,12 +81,12 @@
       align-items: center;
       justify-content: center;
       color: #ffffff;
-      margin: 10px 0 20px 0;
+      margin: 10px 0 10px 0;
       input {
         margin-right: 10px;
         width: auto;
       }
-      h5{
+      h5 {
         font-size: 16px;
       }
     }

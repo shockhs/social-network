@@ -1,47 +1,47 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "60f83bfb93e23c92e05233801205ab34",
+    "revision": "8c587bd64cfd19204842b5845da17ec0",
     "url": "/social-network/index.html"
   },
   {
-    "revision": "482c7a38fef238b15e43",
+    "revision": "bd495afbce39f8b4f13b",
     "url": "/social-network/static/css/2.76cdd94b.chunk.css"
   },
   {
-    "revision": "93d4134dac6641e9793a",
-    "url": "/social-network/static/css/3.0974a504.chunk.css"
+    "revision": "85161101662d3977aac9",
+    "url": "/social-network/static/css/3.406cf0b4.chunk.css"
   },
   {
-    "revision": "873efc8e5cabd8876640",
+    "revision": "e9a4fc1ceb7444efb692",
     "url": "/social-network/static/css/4.e6610314.chunk.css"
   },
   {
-    "revision": "6b2b42df1e9b365d5de4",
-    "url": "/social-network/static/css/main.2b028165.chunk.css"
+    "revision": "6832b13ab35ef8b2c912",
+    "url": "/social-network/static/css/main.c6874db6.chunk.css"
   },
   {
-    "revision": "482c7a38fef238b15e43",
-    "url": "/social-network/static/js/2.38d96ffe.chunk.js"
+    "revision": "bd495afbce39f8b4f13b",
+    "url": "/social-network/static/js/2.5873a884.chunk.js"
   },
   {
     "revision": "76bbb5dbcf32f9e8b66fee98c30112db",
-    "url": "/social-network/static/js/2.38d96ffe.chunk.js.LICENSE.txt"
+    "url": "/social-network/static/js/2.5873a884.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "93d4134dac6641e9793a",
-    "url": "/social-network/static/js/3.0a37c9f0.chunk.js"
+    "revision": "85161101662d3977aac9",
+    "url": "/social-network/static/js/3.afd9c198.chunk.js"
   },
   {
-    "revision": "873efc8e5cabd8876640",
-    "url": "/social-network/static/js/4.ad4625dd.chunk.js"
+    "revision": "e9a4fc1ceb7444efb692",
+    "url": "/social-network/static/js/4.57bcc5cf.chunk.js"
   },
   {
-    "revision": "6b2b42df1e9b365d5de4",
-    "url": "/social-network/static/js/main.d4e1cbd7.chunk.js"
+    "revision": "6832b13ab35ef8b2c912",
+    "url": "/social-network/static/js/main.a6a9155a.chunk.js"
   },
   {
-    "revision": "cfc6ada1867e12565f3f",
-    "url": "/social-network/static/js/runtime-main.8f72eff0.js"
+    "revision": "85ba590b5c771104486c",
+    "url": "/social-network/static/js/runtime-main.4e1e78b0.js"
   },
   {
     "revision": "c56fe719ddeae9799667600c8c4bbec1",

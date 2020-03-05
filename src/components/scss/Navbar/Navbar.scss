@@ -1,8 +1,16 @@
+.fixed-left {
+  position: fixed;
+}
+
+.relative-content {
+  margin-left: auto;
+}
+
 .section-menu {
-  background-color:rgba(24, 22, 38, .4);
+  background-color: rgba(24, 22, 38, 0.4);
   &-li {
     list-style: none;
-    a{
+    a {
       text-decoration: none;
     }
     &-url {
@@ -25,3 +33,5 @@
     }
   }
 }
+
+

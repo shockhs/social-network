@@ -22,18 +22,24 @@ class LoginPageMain extends React.Component {
 
 const maxLengthCurrent = maxLength(30);
 
-const LoginPageForm = (props) => {
+const LoginPageForm = ({ handleSubmit, error, captcha, isLoading }) => {
     return (
-        <form onSubmit={props.handleSubmit} className="section-login-form">
+        <form onSubmit={handleSubmit} className="section-login-form">
             <Field name="email" validate={[required, maxLengthCurrent]} component={Input} placeholder="Email" type="text" />
             <Field name="password" validate={[required, maxLengthCurrent]} component={Input} placeholder="Password" type="password" />
             <div className="col-sm-12 section-login-form-checkbox">
                 <Field name="rememberMe" component="input" type={"checkbox"} />
                 <h5>Remember me</h5>
             </div>
-            {props.error && <span className="errorValidation">{props.error}</span>}
-            <Preloader isLoading={props.isLoading} />
-            <button disabled={props.isLoading}>Sign In</button>
+            {error && <span className="errorValidation">{error}</span>}
+            {captcha
+                ? <>
+                    <img className="captchaLogin" src={captcha} alt="" />
+                    <Field name="captcha" validate={[required]} component={Input} className="captchaInput" />
+                </>
+                : null}
+            <Preloader isLoading={isLoading} />
+            <button disabled={isLoading}>Sign In</button>
         </form>
     );
 }
@@ -44,19 +50,20 @@ const LoginReduxForm = reduxForm({
 })(LoginPageForm);
 
 
-const LoginPage = (props) => {
+const LoginPage = ({ setLoadingStatus, UserLogin, isLoading, captcha }) => {
     const onSubmit = (formData) => {
-        props.setLoadingStatus(true);
-        props.UserLogin(formData.email, formData.password, formData.rememberMe);
+        debugger;
+        setLoadingStatus(true);
+        UserLogin(formData);
     }
     return (
         <div className="main">
             <div className="container">
                 <div className="row">
                     <div className="col-sm-12 header">
-                        <NavLink to="/"><img className="img-responsive" src={logo} alt="" /></NavLink>
+                        <NavLink to="/login"><img className="img-responsive" src={logo} alt="" /></NavLink>
                         <div className="header-button">
-                            <button>Log in</button>
+                            <a href="https://social-network.samuraijs.com/signUp"><button>Sign Up</button></a>
                         </div>
                     </div>
                 </div>
@@ -68,7 +75,7 @@ const LoginPage = (props) => {
                             <div className="section-login-title">
                                 <h2>Login Form</h2>
                             </div>
-                            <LoginReduxForm isLoading={props.isLoading} onSubmit={onSubmit} />
+                            <LoginReduxForm captcha={captcha} isLoading={isLoading} onSubmit={onSubmit} />
                         </div>
                     </div>
                 </div>

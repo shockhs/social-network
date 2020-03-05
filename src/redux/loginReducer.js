@@ -1,12 +1,14 @@
-import { Login, Logout, getAuthStatus } from '../api/API-login';
+import { Login, Logout, getAuthStatus, getCaptcha } from '../api/API-login';
 import { setAuthStatus } from './authReducer';
 import { stopSubmit } from 'redux-form';
 
 
 const SET_LOADING = "loginReducer/SET-LOADING"
+const SET_CAPTCHA = "loginReducer/SET-CAPTCHA"
 
 let initialState = {
-    isLoading: false
+    isLoading: false,
+    captcha: null
 }
 
 const loginReducer = (state = initialState, action) => {
@@ -17,16 +19,24 @@ const loginReducer = (state = initialState, action) => {
                 isLoading: action.status
             }
         }
+        case SET_CAPTCHA: {
+            return {
+                ...state,
+                captcha: action.url
+            }
+        }
         default: return state;
     }
 }
 
 export let setLoadingStatus = (status) => ({ type: SET_LOADING, status });
+export let setCaptcha = (url) => ({ type: SET_CAPTCHA, url });
 
-export const UserLogin = (email, password, rememberMe) => {
+export const UserLogin = ({ email, password, rememberMe, captcha }) => {
+    debugger;
     return (dispatch) => {
         dispatch(setLoadingStatus(true));
-        Login(email, password, rememberMe).then(object => {
+        Login(email, password, rememberMe, captcha).then(object => {
             if (object.data.resultCode === 0) {
                 getAuthStatus().then(object => {
                     if (object.data.resultCode === 0) {
@@ -35,9 +45,15 @@ export const UserLogin = (email, password, rememberMe) => {
                     }
                 }
                 )
-            } else {
-                if (object.data.messages.length > 0)
+            } else if (object.data.resultCode === 10) {
+                getCaptcha().then(object => {
+                    dispatch(setCaptcha(object.data.url));
+                });
+            }
+            else {
+                if (object.data.messages.length > 0) {
                     dispatch(stopSubmit("login", { _error: object.data.messages[0] }))
+                }
             }
             dispatch(setLoadingStatus(false));
         })

@@ -4,7 +4,7 @@ const minifyCSS = require('gulp-csso');
 
 
 function style() {
-    return gulp.src('./src/components/**/*.scss')
+    return gulp.src('./src/components/scss/**/*.scss')
         .pipe(sass())
         .pipe(minifyCSS())
         .pipe(gulp.dest('./src/components/css'))
@@ -14,7 +14,7 @@ function styleSrc() {
     return gulp.src('./src/*.scss')
         .pipe(sass())
         .pipe(minifyCSS())
-        .pipe(gulp.dest('./src'))
+        .pipe(gulp.dest('./src/css'))
 }
 
 

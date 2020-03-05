@@ -8,13 +8,18 @@ const instance = axios.create({
 });
 
 export function getAuthStatus() {
-   return instance.get(`auth/me`);
+    return instance.get(`auth/me`);
 }
 
 
-export const Login = (email,password,rememberMe) => {
+export const Login = (email, password, rememberMe, captcha) => {
     return (
-        instance.post(`/auth/login`, { email, password, rememberMe})
+        instance.post(`/auth/login`, { email, password, rememberMe, captcha })
+    )
+}
+export const getCaptcha = () => {
+    return (
+        instance.post(`/security/get-captcha-url`)
     )
 }
 

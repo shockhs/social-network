@@ -18,6 +18,9 @@
 .formControl-error {
   width: 100%;
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   input {
     outline: none;
     border: none;
@@ -32,6 +35,7 @@
   }
   span {
     color: red;
+    font-weight: 600;
   }
 }
 
@@ -68,8 +72,8 @@
     border-radius: 5px;
     border: 2px solid red;
   }
-  span{
-    color:red;
+  span {
+    color: red;
     font-weight: 700;
   }
 }

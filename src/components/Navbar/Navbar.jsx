@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 //suppress all warnings between comments
 const Navbar = () => {
     return (
-        <div className="col-sm-4">
+        <div className="col-sm-3 fixed-left">
             <nav className="section-menu">
                 <ul>
                     <li className="section-menu-li"><NavLink className="section-menu-li-url" to="/home/profile">Profile</NavLink></li>

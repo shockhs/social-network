@@ -5,7 +5,6 @@ import News from '../News/News';
 import Music from '../Music/Music';
 import Groups from '../Groups/Groups';
 import Settings from '../Settings/Settings';
-import Intro from '../Intro/Intro';
 import UsersContainer from '../Users/UsersContainer';
 import HeaderContainer from '../Header/HeaderContainer';
 import PreloaderPage from '../commons/Preloader/PreloaderPage';
@@ -25,14 +24,14 @@ class HomePage extends React.Component {
 
     render() {
         return (
-            <div>
+            <>
                 <HeaderContainer />
                 <div className="container">
                     <div className="row">
                         <Navbar />
-                        <div className="col-sm-8">
+                        <div className="col-sm-8 relative-content">
                             <div className="section-inner">
-                                <React.Suspense fallback={<PreloaderPage isLoading={true}/>}>
+                                <React.Suspense fallback={<PreloaderPage isLoading={true} />}>
                                     <Route exact path="/home/dialogs" render={() => <DialogsContainer />} />
                                     <Route exact path="/home/profile" render={() => <ProfileContainer />} />
                                     <Route exact path="/home/users/:userId" render={() => <ProfileContainer />} />
@@ -46,7 +45,7 @@ class HomePage extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </>
         );
     }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../css/commons/FormArea/FormArea.css';
 
+
 const FormControl = ({ input, element, meta: { touched, error }, ...props }) => {
     const ErrorStatus = (touched && error);
     const CustomTag = () => {

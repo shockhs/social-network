@@ -4,7 +4,8 @@ import LoginPageMain from './LoginPage';
 import { withRouter } from 'react-router-dom';
 
 let mapStateToProps = (state) => ({
-    isLoading: state.loginPage.isLoading
+    isLoading: state.loginPage.isLoading,
+    captcha: state.loginPage.captcha
 })
 
 
