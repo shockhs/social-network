@@ -37,12 +37,13 @@ const ProfileControl = ({ profile, saveProfileEdits, isLoading, authId }) => {
                 mainlink: formData.contacts.mainlink
             }
         }
-        saveProfileEdits(formData);
-        setEditMode(!editMode);
+        saveProfileEdits(formData).then(() => {
+            setEditMode(!editMode)
+        });
     }
     return (
         <>
-            {(editMode & (authStatus != null)) 
+            {(editMode & (authStatus != null))
                 ? <EditFormControl initialValues={profile} onSubmit={onSubmit} profile={profile} isLoading={isLoading} authStatus={authStatus} />
                 : <><ProfileInfo profile={profile} isLoading={isLoading} authStatus={authStatus} />
                     {authStatus ? <div className="main-button"><button onClick={changeEditMode}>EDIT PROFILE</button></div> : null}</>

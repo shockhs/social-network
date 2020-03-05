@@ -1,6 +1,5 @@
 import React from 'react';
-import './FormArea.scss'
-//import '../../css/commons/FormArea/FormArea.css';
+import '../../css/commons/FormArea/FormArea.css';
 
 const FormControl = ({ input, element, meta: { touched, error }, ...props }) => {
     const ErrorStatus = (touched && error);

@@ -1,4 +1,5 @@
 import { getUserProfile, saveProfile, getStatus, setStatus, setPhoto } from '../api/API-profile';
+import { stopSubmit } from 'redux-form';
 
 const ADD_POST = "profileReducer/ADD-POST";
 const DELETE_POST = "profileReducer/DELETE-POST";
@@ -82,14 +83,29 @@ export let getUserProfileThunk = (userId) => {
 }
 
 export let saveProfileEdits = (data) => {
-    debugger;
-    return async (dispatch,getState) => {
+    return async (dispatch, getState) => {
         let id = getState().authPage.id;
         let response = await saveProfile(data);
         if (response.data.resultCode === 0) {
-            debugger;
             let data = await getUserProfile(id);
             dispatch(setUserProfile(data));
+        } else {
+            let objectError = {
+                "contacts": {}
+            }
+            for (let i = 0; i < response.data.messages.length; i++) {
+                let error = response.data.messages[i].replace("(Contacts->", "").replace(")", "");
+                let _social = error.replace("Invalid url format ", "");
+                _social = _social.toLowerCase();
+                objectError = {
+                    "contacts": {
+                        ...objectError.contacts,
+                        [_social]: error
+                    }
+                }
+            }
+            dispatch(stopSubmit("edit", objectError));
+            return Promise.reject();
         }
     }
 }

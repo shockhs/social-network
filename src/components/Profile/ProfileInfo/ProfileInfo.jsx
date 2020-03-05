@@ -1,6 +1,5 @@
 import React from 'react';
-//import '../../css/Profile/ProfileInfo/ProfileInfo.css';
-import './ProfileInfo.scss'
+import '../../css/Profile/ProfileInfo/ProfileInfo.css';
 import Preloader from '../../commons/Preloader/Preloader';
 import facebook from '../../../img/icons/facebook.svg';
 import youtube from '../../../img/icons/youtube.svg';
