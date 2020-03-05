@@ -21,7 +21,7 @@ export const setPhoto = (photo) => {
     })
 }
 
-export const getUserProfile = (userId) => {
+export const getUserProfileRequest = (userId) => {
     return instance.get(`profile/${userId}`)
         .then(response => response.data)
 }

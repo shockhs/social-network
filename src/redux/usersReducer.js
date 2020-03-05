@@ -1,4 +1,4 @@
-import { getUsers, unfollowUser, followUser } from '../api/API-users';
+import { getUsersRequest, unfollowUserRequest, followUserRequest } from '../api/API-users';
 
 const FOLLOW_CHANGE = "usersReducer/FOLLOW-CHANGE";
 const SET_USERS = "usersReducer/SET-USERS";
@@ -66,10 +66,10 @@ export let setTotalUserCount = (count) => ({ type: SET_COUNT, count });
 export let setPreloader = (status) => ({ type: SET_LOADING_STATUS, status });
 export let followingCurrentProgress = (id) => ({ type: CHANGE_FOLLOWING_PROGRESS_STATUS, id });
 
-export const getUsersThunk = (currentPage, countSize) => {
+export const getUsers = (currentPage, countSize) => {
     return async (dispatch) => {
         dispatch(setPreloader(true));
-        let data = await getUsers(currentPage, countSize);
+        let data = await getUsersRequest(currentPage, countSize);
         dispatch(setPreloader(false));
         dispatch(setUsers(data.items));
         dispatch(setTotalUserCount(data.totalCount));
@@ -85,15 +85,15 @@ const changeFollowStatus = async (dispatch, id, apiRequest, action) => {
     dispatch(followingCurrentProgress(id));
 }
 
-export const unfollowUserThunk = (id) => {
+export const unfollowUser = (id) => {
     return (dispatch) => {
-        changeFollowStatus(dispatch, id, unfollowUser(id), unfollow(id))
+        changeFollowStatus(dispatch, id, unfollowUserRequest(id), unfollow(id))
     }
 }
 
-export const followUserThunk = (id) => {
+export const followUser = (id) => {
     return (dispatch) => {
-        changeFollowStatus(dispatch, id, followUser(id), follow(id))
+        changeFollowStatus(dispatch, id, followUserRequest(id), follow(id))
     }
 }
 

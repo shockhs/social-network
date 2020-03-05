@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Status = ({ authStatus, status, setUserProfileStatusThunk }) => {
+const Status = ({ authStatus, status, setUserProfileStatus }) => {
     let [currentStatus, setCurrentStatus] = useState(status);
     let [editMode, setEditMode] = useState(false);
 
@@ -13,7 +13,7 @@ const Status = ({ authStatus, status, setUserProfileStatusThunk }) => {
 
     const changeCurrentMode = () => {
         if (editMode) {
-            setUserProfileStatusThunk(currentStatus);
+            setUserProfileStatus(currentStatus);
         }
         setEditMode(!editMode);
     }

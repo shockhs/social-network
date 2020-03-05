@@ -33,6 +33,7 @@ class HomePage extends React.Component {
                             <div className="section-inner">
                                 <React.Suspense fallback={<PreloaderPage isLoading={true} />}>
                                     <Route exact path="/home/dialogs" render={() => <DialogsContainer />} />
+                                    <Route exact path="/home" render={() => <ProfileContainer />} />
                                     <Route exact path="/home/profile" render={() => <ProfileContainer />} />
                                     <Route exact path="/home/users/:userId" render={() => <ProfileContainer />} />
                                     <Route exact path="/home/users" render={() => <UsersContainer />} />

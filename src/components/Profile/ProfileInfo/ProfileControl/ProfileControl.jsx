@@ -27,14 +27,14 @@ const ProfileControl = ({ profile, saveProfileEdits, isLoading, authId }) => {
             ...formData,
             lookingForAJob: (formData.lookingForAJob === 'true' ? true : false),
             "contacts": {
-                website: formData.contacts.website,
-                facebook: formData.contacts.facebook,
-                twitter: formData.contacts.twitter,
-                youtube: formData.contacts.youtube,
-                github: formData.contacts.github,
-                instagram: formData.contacts.instagram,
-                vk: formData.contacts.vk,
-                mainlink: formData.contacts.mainlink
+                website: (formData.contacts.website === "" ? null : formData.contacts.website),
+                facebook: (formData.contacts.facebook === "" ? null : formData.contacts.facebook),
+                twitter: (formData.contacts.twitter === "" ? null : formData.contacts.twitter),
+                youtube: (formData.contacts.youtube === "" ? null : formData.contacts.youtube),
+                github: (formData.contacts.github === "" ? null : formData.contacts.github),
+                instagram: (formData.contacts.instagram === "" ? null : formData.contacts.instagram),
+                vk: (formData.contacts.vk === "" ? null : formData.contacts.vk),
+                mainlink: (formData.contacts.mainlink === "" ? null : formData.contacts.mainlink)
             }
         }
         saveProfileEdits(formData).then(() => {

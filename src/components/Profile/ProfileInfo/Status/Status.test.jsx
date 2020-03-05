@@ -40,7 +40,7 @@ describe('StatusComponents', () => {
     })
     test('setStatus should be called after onBlur', () => {
         const callBackTest = jest.fn();
-        const component = create(<Status status="Hello world" setUserProfileStatusThunk={callBackTest}/>);
+        const component = create(<Status status="Hello world" setUserProfileStatus={callBackTest}/>);
         const root = component.root;
         const span = root.findByType('span');
         act(() => {

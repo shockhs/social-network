@@ -5,9 +5,9 @@ import { reduxForm, Field } from 'redux-form';
 
 
 
-const InputFormElement = (props) => {
+const InputFormElement = ({handleSubmit}) => {
     return (
-        <form onSubmit={props.handleSubmit} name="Post">
+        <form onSubmit={handleSubmit} name="Post">
             <div className="row">
                 <div className="col-sm-9">
                     <div className="section-profile-inner-posts-form-area">
@@ -28,9 +28,9 @@ const InputFormElement = (props) => {
 const InputFormRedux = reduxForm({ form: "InputForm" })(InputFormElement);
 
 
-const InputForm = (props) => {
+const InputForm = ({addPostActionCreater}) => {
     let addPost = (post) => {
-        props.addPostActionCreater(post.postsend);
+        addPostActionCreater(post.postsend);
     }
     return (
         <div className="section-profile-inner-posts">

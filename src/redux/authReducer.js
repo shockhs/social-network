@@ -1,4 +1,4 @@
-import { getAuthStatus } from '../api/API-login';
+import { getAuthStatusRequest } from '../api/API-login';
 
 
 const SET_AUTH_STATUS = "authReducer/SET_AUTH_STATUS";
@@ -34,9 +34,9 @@ const authReducer = (state = initialState, action) => {
 export let setAuthStatus = (id, login, email, isAuth) => ({ type: SET_AUTH_STATUS, data: { id, login, email, isAuth } });
 export let setRedirectUrl = (pathRedirect) => ({ type: SET_SUCCESS_STATUS, pathRedirect });
 
-export function getAuthStatusThunk() {
+export function getAuthStatus() {
     return async function (dispatch) {
-        let response = await getAuthStatus();
+        let response = await getAuthStatusRequest();
         if (response.data.resultCode === 0) {
             let { id, login, email } = response.data.data;
             dispatch(setAuthStatus(id, login, email, true));

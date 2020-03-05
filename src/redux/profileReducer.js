@@ -1,4 +1,4 @@
-import { getUserProfile, saveProfile, getStatus, setStatus, setPhoto } from '../api/API-profile';
+import { getUserProfileRequest, saveProfile, getStatus, setStatus, setPhoto } from '../api/API-profile';
 import { stopSubmit } from 'redux-form';
 
 const ADD_POST = "profileReducer/ADD-POST";
@@ -73,10 +73,10 @@ export let updateUserProfileAvatar = (avatar) => {
     }
 }
 
-export let getUserProfileThunk = (userId) => {
+export let getUserProfile = (userId) => {
     return async (dispatch) => {
         dispatch(setPreloader(true));
-        let response = await getUserProfile(userId);
+        let response = await getUserProfileRequest(userId);
         dispatch(setPreloader(false));
         dispatch(setUserProfile(response));
     }
@@ -87,7 +87,7 @@ export let saveProfileEdits = (data) => {
         let id = getState().authPage.id;
         let response = await saveProfile(data);
         if (response.data.resultCode === 0) {
-            let data = await getUserProfile(id);
+            let data = await getUserProfileRequest(id);
             dispatch(setUserProfile(data));
         } else {
             let objectError = {
@@ -110,7 +110,7 @@ export let saveProfileEdits = (data) => {
     }
 }
 
-export let getUserProfileStatusThunk = (userId) => {
+export let getUserProfileStatus = (userId) => {
     return async (dispatch) => {
         let response = await getStatus(userId);
         if (response.status === 200) {
@@ -119,7 +119,7 @@ export let getUserProfileStatusThunk = (userId) => {
     }
 }
 
-export let setUserProfileStatusThunk = (status) => {
+export let setUserProfileStatus = (status) => {
     return async (dispatch) => {
         let response = await setStatus(status)
         if (response.data.resultCode === 0) {

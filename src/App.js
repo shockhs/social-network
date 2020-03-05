@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import MainPage from './components/MainPage/MainPage';
-import { getAuthStatusThunk, setRedirectUrl } from './redux/authReducer';
+import { getAuthStatus, setRedirectUrl } from './redux/authReducer';
 import { connect } from 'react-redux';
 import LoginPageContainerLoader from './components/LoginPage/LoginPageContainerLoader';
 import PreloaderMain from './components/commons/Preloader/PreloaderMain';
@@ -14,7 +14,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getAuthStatusThunk();
+    this.getAuthStatus();
     if (this.props.isAuth == null) {
       this.setState({
         url: this.props.location.pathname
@@ -22,8 +22,8 @@ class App extends React.Component {
     }
   }
 
-  async getAuthStatusThunk() {
-    await this.props.getAuthStatusThunk();
+  async getAuthStatus() {
+    await this.props.getAuthStatus();
   }
 
   render() {
@@ -45,6 +45,6 @@ let mapStateToProps = (state) => ({
 })
 
 
-export default compose(withRouter, connect(mapStateToProps, { setRedirectUrl, getAuthStatusThunk }))(App);
+export default compose(withRouter, connect(mapStateToProps, { setRedirectUrl, getAuthStatus }))(App);
 
 

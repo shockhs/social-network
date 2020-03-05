@@ -1,4 +1,4 @@
-import { Login, Logout, getAuthStatus, getCaptcha } from '../api/API-login';
+import { Login, Logout, getAuthStatusRequest, getCaptcha } from '../api/API-login';
 import { setAuthStatus } from './authReducer';
 import { stopSubmit } from 'redux-form';
 
@@ -38,7 +38,7 @@ export const UserLogin = ({ email, password, rememberMe, captcha }) => {
         dispatch(setLoadingStatus(true));
         Login(email, password, rememberMe, captcha).then(object => {
             if (object.data.resultCode === 0) {
-                getAuthStatus().then(object => {
+                getAuthStatusRequest().then(object => {
                     if (object.data.resultCode === 0) {
                         let { id, login, email } = object.data.data;
                         dispatch(setAuthStatus(id, login, email, true));

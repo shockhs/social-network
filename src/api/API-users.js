@@ -7,15 +7,15 @@ const instance = axios.create({
     baseURL: "https://social-network.samuraijs.com/api/1.0/"
 });
 
-export const followUser = (id) => {
+export const followUserRequest = (id) => {
     return instance.post(`follow/${id}`)
 }
 
-export const unfollowUser = (id) => {
+export const unfollowUserRequest = (id) => {
     return instance.delete(`follow/${id}`)
 }
 
-export const getUsers = (currentPage, countSize) => {
+export const getUsersRequest = (currentPage, countSize) => {
     return instance.get(`users?page=${currentPage}&count=${countSize}`)
         .then(response => response.data)
 }
