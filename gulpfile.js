@@ -14,7 +14,7 @@ function styleSrc() {
     return gulp.src('./src/*.scss')
         .pipe(sass())
         .pipe(minifyCSS())
-        .pipe(gulp.dest('./src/css'))
+        .pipe(gulp.dest('./src'))
 }
 
 
