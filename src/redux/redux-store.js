@@ -16,6 +16,9 @@ let reducersBanch = combineReducers({
     form: formReducer
 });
 
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducersBanch, composeEnhancers(applyMiddleware(thunkMiddleWare)));
+
+window.store = store;
 export default store;

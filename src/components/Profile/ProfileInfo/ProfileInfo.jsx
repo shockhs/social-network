@@ -1,5 +1,6 @@
 import React from 'react';
-import '../../css/Profile/ProfileInfo/ProfileInfo.css';
+//import '../../css/Profile/ProfileInfo/ProfileInfo.css';
+import './ProfileInfo.scss'
 import Preloader from '../../commons/Preloader/Preloader';
 import facebook from '../../../img/icons/facebook.svg';
 import youtube from '../../../img/icons/youtube.svg';
@@ -12,11 +13,11 @@ import github from '../../../img/icons/github.svg';
 import StatusContainer from './Status/StatusContainer';
 import AvatarContainer from './Avatar/AvatarContainer';
 
-const ProfileInfo = ({ profile, isLoading, authId }) => {
+
+const ProfileInfo = ({ profile, isLoading, authStatus }) => {
     if (!profile) {
         return <Preloader />
     }
-    let authStatus = (authId === profile.userId);
     return (
         <div className="section-profile-inner-about">
             {(isLoading) ? <div className="col-sm-2 col-sm-offset-5"><Preloader isLoading={isLoading} /></div> :
@@ -32,7 +33,7 @@ const ProfileInfo = ({ profile, isLoading, authId }) => {
                                         <h1>{profile.fullName}</h1>
                                     </div>
                                     <div className="section-profile-inner-about-description-main-status">
-                                        <StatusContainer authStatus={authStatus}/>
+                                        <StatusContainer authStatus={authStatus} />
                                     </div>
                                 </div>
                                 <div className="section-profile-inner-about-description-about col-sm-12">
@@ -74,5 +75,6 @@ const ProfileInfo = ({ profile, isLoading, authId }) => {
         </div>
     );
 }
+
 
 export default ProfileInfo;

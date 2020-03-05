@@ -10,6 +10,26 @@
     brightness(79%) contrast(101%);
 }
 
+.main-button {
+  display: flex;
+  justify-content: center;
+  button {
+    outline: none;
+    margin-top: 10px;
+    font-weight: 700;
+    padding: 5px 60px 5px 60px;
+    color: #ffffff;
+    border: none;
+    background: rgb(113, 8, 199);
+    background: radial-gradient(
+      circle,
+      rgba(113, 8, 199, 1) 0%,
+      rgba(0, 0, 0, 1) 100%
+    );
+    border-radius: 10px;
+  }
+}
+
 .section-profile {
   background-color: transparent;
   &-inner {

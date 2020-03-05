@@ -1,4 +1,4 @@
-import { getUserProfile, getStatus, setStatus, setPhoto } from '../api/API-profile';
+import { getUserProfile, saveProfile, getStatus, setStatus, setPhoto } from '../api/API-profile';
 
 const ADD_POST = "profileReducer/ADD-POST";
 const DELETE_POST = "profileReducer/DELETE-POST";
@@ -38,7 +38,7 @@ const profileReducer = (state = initialState, action) => {
         }
         case SET_AVATAR: {
             return {
-                ...state, profile: {...state.profile, photos: action.photos}
+                ...state, profile: { ...state.profile, photos: action.photos }
             };
         }
         case DELETE_POST: {
@@ -55,12 +55,12 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-export let addPostActionCreater = (post) => ({ type: ADD_POST, post });
-export let setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
-export let setUpdatedAvatar = (photos) => ({ type: SET_AVATAR, photos })
-export let setPreloader = (status) => ({ type: SET_LOADING_STATUS, status });
-export let setProfileStatus = (status) => ({ type: SET_PROFILE_STATUS, status });
-export let deletePostActionCreater = (id) => ({ type: DELETE_POST, id });
+export let addPostActionCreater = (post) => ({ type: ADD_POST, post }); //add post
+export let setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile }); // set profile for ProfileInfo
+export let setUpdatedAvatar = (photos) => ({ type: SET_AVATAR, photos }); // new photo dispatch
+export let setPreloader = (status) => ({ type: SET_LOADING_STATUS, status }); // preloader for updatings
+export let setProfileStatus = (status) => ({ type: SET_PROFILE_STATUS, status }); // status
+export let deletePostActionCreater = (id) => ({ type: DELETE_POST, id }); // doesn`t use
 
 export let updateUserProfileAvatar = (avatar) => {
     debugger;
@@ -78,6 +78,19 @@ export let getUserProfileThunk = (userId) => {
         let response = await getUserProfile(userId);
         dispatch(setPreloader(false));
         dispatch(setUserProfile(response));
+    }
+}
+
+export let saveProfileEdits = (data) => {
+    debugger;
+    return async (dispatch,getState) => {
+        let id = getState().authPage.id;
+        let response = await saveProfile(data);
+        if (response.data.resultCode === 0) {
+            debugger;
+            let data = await getUserProfile(id);
+            dispatch(setUserProfile(data));
+        }
     }
 }
 

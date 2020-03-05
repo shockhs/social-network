@@ -1,0 +1,33 @@
+.edit-liprofile {
+  color: rgb(0, 0, 0);
+  margin-right: 10px;
+  width: auto;
+  text-shadow: 1px 1px 1px #ffffff;
+  font-weight: 700;
+}
+
+.fullname-style {
+  font-size: 36px;
+  font-weight: 700;
+  width: 100%;
+  input {
+    width: 100%;
+  }
+  span {
+    color: red;
+    font-size: 16px;
+  }
+  ::-webkit-input-placeholder {
+    /* Edge */
+    color: #616060;
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #616060;
+  }
+
+  ::placeholder {
+    color: #616060;
+  }
+}

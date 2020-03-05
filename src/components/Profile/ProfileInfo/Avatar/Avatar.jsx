@@ -10,7 +10,7 @@ const Avatar = ({ photo, authStatus, updateUserProfileAvatar }) => {
     }
     return <>
         <img src={photo || avatar} alt="" className="img-responsive img-circle" />
-        {authStatus ? <><label for="file-upload" class="custom-file-upload"><span>UPLOAD AVATAR</span></label> <input onChange={changeAvatar} id="file-upload" type="file" /></> : null}
+        {authStatus ? <><label htmlFor="file-upload" className="custom-file-upload"><span>UPLOAD AVATAR</span></label> <input onChange={changeAvatar} id="file-upload" type="file" /></> : null}
     </>
 }
 

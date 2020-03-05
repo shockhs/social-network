@@ -1,5 +1,5 @@
 import React from 'react';
-import { getUserProfileThunk, getUserProfileStatusThunk } from '../../redux/profileReducer';
+import { getUserProfileThunk, saveProfileEdits, getUserProfileStatusThunk } from '../../redux/profileReducer';
 import Profile from './Profile';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -29,4 +29,4 @@ let mapStateToProps = (state) => ({
     isLoading: getLoadingStatus(state)
 });
 
-export default connect(mapStateToProps, { getUserProfileStatusThunk, getUserProfileThunk })(withRouter(ProfileContainer));
+export default connect(mapStateToProps, { saveProfileEdits, getUserProfileStatusThunk, getUserProfileThunk })(withRouter(ProfileContainer));

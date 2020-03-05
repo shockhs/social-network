@@ -29,3 +29,7 @@ export const getUserProfile = (userId) => {
 export const setStatus = (status) => {
     return instance.put(`profile/status`, { status })
 }
+
+export const saveProfile = (profile) => {
+    return instance.put(`profile`, profile)
+}
