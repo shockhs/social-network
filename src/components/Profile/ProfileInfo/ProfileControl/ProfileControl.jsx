@@ -42,11 +42,11 @@ const ProfileControl = ({ profile, saveProfileEdits, isLoading, authId }) => {
     }
     return (
         <>
-            {editMode
+            {(editMode & (authStatus != null)) 
                 ? <EditFormControl initialValues={profile} onSubmit={onSubmit} profile={profile} isLoading={isLoading} authStatus={authStatus} />
-                :
-                <><ProfileInfo profile={profile} isLoading={isLoading} authStatus={authStatus} />
-                    <div className="main-button"><button onClick={changeEditMode}>EDIT PROFILE</button></div></>}
+                : <><ProfileInfo profile={profile} isLoading={isLoading} authStatus={authStatus} />
+                    {authStatus ? <div className="main-button"><button onClick={changeEditMode}>EDIT PROFILE</button></div> : null}</>
+            }
         </>
     )
 }
