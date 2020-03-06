@@ -6,12 +6,13 @@ const SET_CURRENT_PAGE = "usersReducer/SET-CURRENT-PAGE";
 const SET_COUNT = "usersReducer/SET-COUNT";
 const SET_LOADING_STATUS = "usersReducer/SET-LOADING-STATUS";
 const CHANGE_FOLLOWING_PROGRESS_STATUS = "usersReducer/CHANGE-FOLLOWING-PROGRESS-STATUS";
+const SET_DEFAULT_PAGE = "usersReducer/SET-DEFAULT-PAGE";
 
 let initialState = {
     users: [],
     currentPage: 1,
     countSize: 5,
-    totalCount: 0,
+    totalCount: null,
     isLoading: false,
     statusFollowing: []
 };
@@ -30,9 +31,19 @@ const usersReducer = (state = initialState, action) => {
         case SET_USERS: {
             return { ...state, users: [...state.users, ...action.users] };
         }
+        case SET_DEFAULT_PAGE: {
+            return {
+                users: [],
+                currentPage: 1,
+                countSize: 5,
+                totalCount: null,
+                isLoading: false,
+                statusFollowing: []
+            }
+        }
         case SET_CURRENT_PAGE: {
             return {
-                ...state, currentPage: (action.currentPage + 1)
+                ...state, currentPage: action.currentPage 
             };
         }
         case SET_COUNT: {
@@ -65,8 +76,10 @@ export let showMore = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage })
 export let setTotalUserCount = (count) => ({ type: SET_COUNT, count });
 export let setPreloader = (status) => ({ type: SET_LOADING_STATUS, status });
 export let followingCurrentProgress = (id) => ({ type: CHANGE_FOLLOWING_PROGRESS_STATUS, id });
+export let setDefaultPage = () => ({ type: SET_DEFAULT_PAGE });
 
 export const getUsers = (currentPage, countSize) => {
+    debugger;
     return async (dispatch) => {
         dispatch(setPreloader(true));
         let data = await getUsersRequest(currentPage, countSize);

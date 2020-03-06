@@ -6,7 +6,7 @@ import { Route, BrowserRouter } from 'react-router-dom';
 import SendMessageContainer from './SendMessage/SendMessageContainer';
 
 const Dialogs = ({dialogsData,membersData,messagesData}) => {
-    let mainDialogsData = dialogsData.map((dialog) => (<Route exact path={"/dialogs/" + dialog.id} render={() => <Message id={dialog.id} messagesData={messagesData} />} />));
+    let mainDialogsData = dialogsData.map((dialog) => (<Route exact path={"/dialogs/" + dialog.id} render={() => <Message key={dialog.id} id={dialog.id} messagesData={messagesData} />} />));
     return (
         <BrowserRouter>
             <div className="section-dialogs">

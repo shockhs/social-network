@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Status = ({ authStatus, status, setUserProfileStatus }) => {
     let [currentStatus, setCurrentStatus] = useState(status);
     let [editMode, setEditMode] = useState(false);
-
+    
     useEffect(() => {
         setCurrentStatus(status);
         return () => {

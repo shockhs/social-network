@@ -11,11 +11,11 @@ import { BrowserRouter, HashRouter } from 'react-router-dom';
 import FunctionRender from './App';
 
 ReactDOM.render(
-    <HashRouter>
+    <BrowserRouter>
         <Provider store={store}>
             <FunctionRender />
         </Provider>
-    </HashRouter>, document.getElementById('root'));
+    </BrowserRouter>, document.getElementById('root'));
 
 
 

@@ -1,15 +1,31 @@
-@import './components/scss/normalize.scss';
+@import "./components/scss/normalize.scss";
+@import "./components/scss/vars.scss";
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+@media (max-width: $screen-sm-max) {
+  .fixed-left {
+    display: flex;
+  }
+
+  .relative-content {
+    display: flex;
+  }
+
+  .outer {
+    display: flex;
+    flex-direction: column;
+  }
 }

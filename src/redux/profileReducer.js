@@ -119,12 +119,16 @@ export let getUserProfileStatus = (userId) => {
     }
 }
 
-export let setUserProfileStatus = (status) => {
-    return async (dispatch) => {
+export let setUserProfileStatus = (status) => async (dispatch) => {
+    debugger;
+    try {
         let response = await setStatus(status)
         if (response.data.resultCode === 0) {
             dispatch(setProfileStatus(status));
         }
+    }
+    catch (error) {
+        debugger;
     }
 }
 

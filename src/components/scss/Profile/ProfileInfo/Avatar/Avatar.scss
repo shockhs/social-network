@@ -1,3 +1,5 @@
+@import "../../../vars.scss";
+
 input[type="file"] {
   display: none;
 }
@@ -22,3 +24,10 @@ input[type="file"] {
   border-radius: 10px;
   cursor: pointer;
 }
+
+@media (max-width: $screen-sm-max) {
+  .custom-file-upload {
+    margin-bottom: 20px;
+  }
+}
+

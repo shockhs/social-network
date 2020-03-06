@@ -26,22 +26,24 @@ class HomePage extends React.Component {
         return (
             <>
                 <HeaderContainer />
-                <div className="container">
-                    <div className="row">
-                        <Navbar />
-                        <div className="col-sm-8 relative-content">
-                            <div className="section-inner">
-                                <React.Suspense fallback={<PreloaderPage isLoading={true} />}>
-                                    <Route exact path="/home/dialogs" render={() => <DialogsContainer />} />
-                                    <Route exact path="/home" render={() => <ProfileContainer />} />
-                                    <Route exact path="/home/profile" render={() => <ProfileContainer />} />
-                                    <Route exact path="/home/users/:userId" render={() => <ProfileContainer />} />
-                                    <Route exact path="/home/users" render={() => <UsersContainer />} />
-                                    <Route exact path="/home/news" component={News} />
-                                    <Route exact path="/home/music" component={Music} />
-                                    <Route exact path="/home/groups" component={Groups} />
-                                    <Route exact path="/home/settings" component={Settings} />
-                                </React.Suspense>
+                <div className="outer-section">
+                    <div className="container">
+                        <div className="row">
+                            <Navbar />
+                            <div className="col-sm-8 relative-content">
+                                <div className="section-inner">
+                                    <React.Suspense fallback={<PreloaderPage isLoading={true} />}>
+                                        <Route exact path="/home/dialogs" render={() => <DialogsContainer />} />
+                                        <Route exact path="/home" render={() => <ProfileContainer />} />
+                                        <Route exact path="/home/profile" render={() => <ProfileContainer />} />
+                                        <Route exact path="/home/users/:userId" render={() => <ProfileContainer />} />
+                                        <Route exact path="/home/users" render={() => <UsersContainer />} />
+                                        <Route exact path="/home/news" component={News} />
+                                        <Route exact path="/home/music" component={Music} />
+                                        <Route exact path="/home/groups" component={Groups} />
+                                        <Route exact path="/home/settings" component={Settings} />
+                                    </React.Suspense>
+                                </div>
                             </div>
                         </div>
                     </div>
