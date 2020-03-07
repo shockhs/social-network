@@ -52,7 +52,6 @@ const LoginReduxForm = reduxForm({
 
 const LoginPage = ({ setLoadingStatus, UserLogin, isLoading, captcha }) => {
     const onSubmit = (formData) => {
-        debugger;
         setLoadingStatus(true);
         UserLogin(formData);
     }

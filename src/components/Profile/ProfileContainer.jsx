@@ -4,6 +4,7 @@ import Profile from './Profile';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getLoadingStatus, getProfile, getAuthId } from '../../redux/Selectors/profileSelector';
+import { addNewDialogsMember } from '../../redux/dialogsReducer';
 
 
 class ProfileContainer extends React.Component {
@@ -29,4 +30,4 @@ let mapStateToProps = (state) => ({
     isLoading: getLoadingStatus(state)
 });
 
-export default connect(mapStateToProps, { saveProfileEdits, getUserProfileStatus, getUserProfile })(withRouter(ProfileContainer));
+export default connect(mapStateToProps, { saveProfileEdits, addNewDialogsMember, getUserProfileStatus, getUserProfile })(withRouter(ProfileContainer));

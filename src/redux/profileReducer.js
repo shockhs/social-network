@@ -29,7 +29,7 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST:
             return {
                 ...state,
-                postsData: [...state.postsData, { id: Math.random(0) * 1000, likesCount: 0, message: action.post }]
+                postsData: [...state.postsData, { id: Math.random(0) * 1000, likesCount: 0, message: action.post,blockedId: [] }]
             }
         case SET_USER_PROFILE: {
             return { ...state, profile: action.profile }
@@ -92,7 +92,6 @@ export let dislikePost = (id, userId) => ({ type: DISLIKE, id, userId })
 export let likePost = (id, userId) => ({ type: LIKE, id, userId })
 
 export let updateUserProfileAvatar = (avatar) => {
-    debugger;
     return async (dispatch) => {
         let response = await setPhoto(avatar)
         if (response.data.resultCode === 0) {
@@ -148,7 +147,6 @@ export let getUserProfileStatus = (userId) => {
 }
 
 export let setUserProfileStatus = (status) => async (dispatch) => {
-    debugger;
     try {
         let response = await setStatus(status)
         if (response.data.resultCode === 0) {
@@ -156,7 +154,7 @@ export let setUserProfileStatus = (status) => async (dispatch) => {
         }
     }
     catch (error) {
-        debugger;
+       // FAIL 
     }
 }
 

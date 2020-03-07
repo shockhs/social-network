@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 const Member = ({id,name}) => {
     return (
         <li className="section-dialogs-inner-members-li">
-            <NavLink className="section-dialogs-inner-members-li-url" to={"/dialogs/" + id}>{name}</NavLink>
+            <NavLink className="section-dialogs-inner-members-li-url" to={"/home/dialogs/" + id}>{name}</NavLink>
         </li>
     );
 }

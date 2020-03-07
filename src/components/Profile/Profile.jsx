@@ -5,11 +5,11 @@ import InputFormContainer from './MyPosts/InputForm/InputFormContainer';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 
 
-const Profile = ({ authId, saveProfileEdits, isLoading, profile, dislikePost, likePost }) => {
+const Profile = ({ authId, saveProfileEdits, addNewDialogsMember, isLoading, profile, dislikePost, likePost }) => {
     return (
         <div className="section-profile">
             <div className="section-profile-inner">
-                <ProfileControl saveProfileEdits={saveProfileEdits} authId={authId} isLoading={isLoading} profile={profile} />
+                <ProfileControl addNewDialogsMember={addNewDialogsMember} saveProfileEdits={saveProfileEdits} authId={authId} isLoading={isLoading} profile={profile} />
                 <InputFormContainer />
                 <MyPostsContainer />
             </div>

@@ -79,7 +79,6 @@ export let followingCurrentProgress = (id) => ({ type: CHANGE_FOLLOWING_PROGRESS
 export let setDefaultPage = () => ({ type: SET_DEFAULT_PAGE });
 
 export const getUsers = (currentPage, countSize) => {
-    debugger;
     return async (dispatch) => {
         dispatch(setPreloader(true));
         let data = await getUsersRequest(currentPage, countSize);

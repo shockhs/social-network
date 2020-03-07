@@ -7,15 +7,15 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import { /*BrowserRouter,*/ HashRouter } from 'react-router-dom';
+import { /*HashRouter,*/ BrowserRouter } from 'react-router-dom';
 import FunctionRender from './App';
 
 ReactDOM.render(
-    <HashRouter>
+    <BrowserRouter>
         <Provider store={store}>
             <FunctionRender />
         </Provider>
-    </HashRouter>, document.getElementById('root'));
+    </BrowserRouter>, document.getElementById('root'));
 
 
 

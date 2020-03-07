@@ -33,7 +33,6 @@ export let setLoadingStatus = (status) => ({ type: SET_LOADING, status });
 export let setCaptcha = (url) => ({ type: SET_CAPTCHA, url });
 
 export const UserLogin = ({ email, password, rememberMe, captcha }) => {
-    debugger;
     return (dispatch) => {
         dispatch(setLoadingStatus(true));
         Login(email, password, rememberMe, captcha).then(object => {

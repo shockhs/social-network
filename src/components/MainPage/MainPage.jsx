@@ -9,7 +9,7 @@ import UsersContainer from '../Users/UsersContainer';
 import HeaderContainer from '../Header/HeaderContainer';
 import PreloaderPage from '../commons/Preloader/PreloaderPage';
 
-const DialogsContainer = React.lazy(() => import('../Dialogs/DialogsContainer'));
+const Dialogs= React.lazy(() => import('../Dialogs/Dialogs'));
 const ProfileContainer = React.lazy(() => import('../Profile/ProfileContainer'));
 
 
@@ -33,7 +33,7 @@ class HomePage extends React.Component {
                             <div className="col-sm-8 relative-content">
                                 <div className="section-inner">
                                     <React.Suspense fallback={<PreloaderPage isLoading={true} />}>
-                                        <Route exact path="/home/dialogs" render={() => <DialogsContainer />} />
+                                        <Route exact path="/home/dialogs" render={() => <Dialogs />} />
                                         <Route exact path="/home" render={() => <ProfileContainer />} />
                                         <Route exact path="/home/profile" render={() => <ProfileContainer />} />
                                         <Route exact path="/home/users/:userId" render={() => <ProfileContainer />} />

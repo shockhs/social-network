@@ -13,7 +13,7 @@ import StatusContainer from './Status/StatusContainer';
 import AvatarContainer from './Avatar/AvatarContainer';
 
 
-const ProfileInfo = ({ profile, isLoading, authStatus }) => {
+const ProfileInfo = ({ profile, isLoading, authStatus, addNewDialogsMember }) => {
     if (!profile) {
         return <Preloader />
     }
@@ -22,7 +22,7 @@ const ProfileInfo = ({ profile, isLoading, authStatus }) => {
             {(isLoading) ? <div className="col-sm-2 col-sm-offset-5"><Preloader isLoading={isLoading} /></div> :
                 <div className="row">
                     <div className="col-sm-4 section-profile-inner-about-avatar">
-                        <AvatarContainer authStatus={authStatus} photo={profile.photos.large} />
+                        <AvatarContainer addNewDialogsMember={addNewDialogsMember} id={profile.userId} authStatus={authStatus} photo={profile.photos.large} />
                     </div>
                     <div className="col-sm-8">
                         <div className="row">

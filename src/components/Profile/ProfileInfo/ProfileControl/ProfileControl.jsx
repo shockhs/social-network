@@ -5,7 +5,7 @@ import Preloader from '../../../commons/Preloader/Preloader';
 import EditFormControl from '../EditProfile/EditProfile';
 
 
-const ProfileControl = ({ profile, saveProfileEdits, isLoading, authId }) => {
+const ProfileControl = ({ profile, saveProfileEdits, isLoading, authId, addNewDialogsMember }) => {
     let [editMode, setEditMode] = useState(false);
     useEffect(() => {
         setEditMode(editMode);
@@ -45,7 +45,7 @@ const ProfileControl = ({ profile, saveProfileEdits, isLoading, authId }) => {
         <>
             {(editMode & (authStatus != null))
                 ? <EditFormControl initialValues={profile} onSubmit={onSubmit} profile={profile} isLoading={isLoading} authStatus={authStatus} />
-                : <><ProfileInfo profile={profile} isLoading={isLoading} authStatus={authStatus} />
+                : <><ProfileInfo addNewDialogsMember={addNewDialogsMember} profile={profile} isLoading={isLoading} authStatus={authStatus} />
                     {authStatus ? <div className="main-button"><button onClick={changeEditMode}>EDIT PROFILE</button></div> : null}</>
             }
         </>

@@ -2,23 +2,36 @@ import React from 'react';
 import '../css/Dialogs//Dialogs.css';
 import Members from './Members/Members';
 import Message from './Members/Messages/Message';
-import { Route, BrowserRouter } from 'react-router-dom';
-import SendMessageContainer from './SendMessage/SendMessageContainer';
+import { BrowserRouter } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import * as axios from 'axios';
 
-const Dialogs = ({dialogsData,membersData,messagesData}) => {
-    let mainDialogsData = dialogsData.map((dialog) => (<Route exact path={"/dialogs/" + dialog.id} render={() => <Message key={dialog.id} id={dialog.id} messagesData={messagesData} />} />));
+const Dialogs = ({ dialogsData, messagesData }) => {
+    const instance = axios.create({
+        withCredentials: true,
+        headers: { "API-KEY": "9832db98-b9d3-460c-9cab-5d06ff193b07" },
+        baseURL: "https://social-network.samuraijs.com/api/1.0/"
+    });
+    let [membersList, setMembersList] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await instance.get(`/dialogs`);
+            if (response.status === 200) {
+                setMembersList(response.data);
+            }
+        }
+        fetchData();
+    }, [])
     return (
         <BrowserRouter>
             <div className="section-dialogs">
                 <div className="section-dialogs-inner">
                     <div className="col-sm-3">
-                        <Members membersData={membersData} />
+                        <Members />
                     </div>
                     <div className="col-sm-9">
-                        <div className="section-dialogs-inner-active">
-                            {mainDialogsData}
-                        </div>
-                        <SendMessageContainer />
+                        <Message membersList={membersList} />
                     </div>
                 </div>
             </div>
