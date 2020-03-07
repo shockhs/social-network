@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "eslint-plugin-react-hooks": "^2.5.0",
     "gh-pages": "^2.2.0",
     "gulp-csso": "^4.0.1",
     "gulp-react": "^4.0.0",

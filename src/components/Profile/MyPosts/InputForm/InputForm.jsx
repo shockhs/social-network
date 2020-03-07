@@ -1,13 +1,13 @@
 import React from 'react';
 import '../../../css/Profile/MyPosts/InputForm/InputForm.css';
 import { reduxForm, Field } from 'redux-form';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import Preloader from '../../../commons/Preloader/Preloader';
 
-
-
-
-const InputFormElement = ({handleSubmit}) => {
+const InputFormElement = ({ handleSubmit, ...props }) => {
     return (
-        <form onSubmit={handleSubmit} name="Post">
+        <form onSubmit={handleSubmit}>
             <div className="row">
                 <div className="col-sm-9">
                     <div className="section-profile-inner-posts-form-area">
@@ -27,17 +27,28 @@ const InputFormElement = ({handleSubmit}) => {
 
 const InputFormRedux = reduxForm({ form: "InputForm" })(InputFormElement);
 
+const InputForm = (props) => {
+    let [sendStatus, setSendStatus] = useState(false);
+    let postsend = "";
+    useEffect(() => {
+        setTimeout(() => {
+            setSendStatus(false);
+        }, 1000);
+    }, [sendStatus]);
 
-const InputForm = ({addPostActionCreater}) => {
     let addPost = (post) => {
-        addPostActionCreater(post.postsend);
+        props.addPostActionCreater(post.postsend);
+        setSendStatus(true);
     }
-    return (
-        <div className="section-profile-inner-posts">
-            <div className="section-profile-inner-posts-form">
-                <InputFormRedux onSubmit={addPost} />
-            </div>
-        </div>
+    return (<>
+        {sendStatus
+            ? <div className="section-users-elements-status"><Preloader isLoading={true} /></div>
+            : <div className="section-profile-inner-posts">
+                <div className="section-profile-inner-posts-form">
+                    <InputFormRedux initialValues={postsend} onSubmit={addPost} />
+                </div >
+            </div >
+        }</>
     );
 }
 

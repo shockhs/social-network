@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../../css/Dialogs/Members/Messages/Message.css';
+import avatar from '../../../../img/default-avatar.png'
 
 const Message = ({messagesData,id}) => {
     let mainMessageData = messagesData.map((item) => {
@@ -9,7 +10,7 @@ const Message = ({messagesData,id}) => {
                     <div className="row">
                         <div className="col-sm-2">
                             <div className="section-dialogs-inner-active-message-avatar">
-                                <img className="rounded-circle" src="https://static.mk.ru/upload/entities/2019/05/08/00/articles/detailPicture/c7/b5/08/6e/5dda626cb409b1fa6942c29040609e17.jpg" alt="" />
+                                <img className="rounded-circle" src={avatar} alt="" />
                             </div>
                         </div>
                         <div className="col-sm-10">

@@ -25,7 +25,7 @@ const EditProfileForm = ({ profile, isLoading, authStatus, handleSubmit, ...prop
                                     <div className="section-profile-inner-about-description col-sm-12">
                                         <div className="section-profile-inner-about-description-main col-sm-12">
                                             <div className="fullname-style">
-                                                <Field name="fullName" validate={[required, maxLengthCurrent]} value={profile.fullName ? profile.fullName : ''} component={InputEdit} type="text" />
+                                                <Field name="fullName" validate={[required, maxLengthCurrent]}  component={InputEdit} type="text" />
                                             </div>
                                             <div className="section-profile-inner-about-description-main-status">
                                                 <StatusContainer authStatus={authStatus} />
