@@ -17,7 +17,6 @@ const InputFormElement = ({ handleSubmit, ...props }) => {
                 <div className="col-sm-3">
                     <div className="section-profile-inner-posts-form-functions">
                         <button className="section-profile-inner-posts-form-functions-button">Add post</button>
-                        {/*<button className="section-profile-inner-posts-form-functions-button">Remove</button>*/}
                     </div>
                 </div>
             </div>

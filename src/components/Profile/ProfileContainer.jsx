@@ -1,5 +1,5 @@
 import React from 'react';
-import { getUserProfile, saveProfileEdits, getUserProfileStatus } from '../../redux/profileReducer';
+import { getUserProfile, saveProfileEdits, getUserProfileStatus} from '../../redux/profileReducer';
 import Profile from './Profile';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';

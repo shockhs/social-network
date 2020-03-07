@@ -36,20 +36,40 @@
   &-social {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    &-buttons {
+      display: flex;
+      flex-direction: column;
+      margin-right: 10px;
+      button:hover {
+        background-color: #ffffff;
+      }
+      .like {
+        background-color: rgb(41, 180, 13);
+      }
+      .dislike {
+        background-color: rgb(131, 102, 235);
+      }
+      .delete {
+        background-color: black;
+      }
+    }
     &-counter {
-      border: 1px solid #ffffff;
-      background-color: rgba(0, 80, 252, 0.4);
-      text-align: center;
-      padding: 5px;
-      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      background-color: #ffffff;
+      padding: 5px 0 5px 0;
+      width: 90px;
+      margin: auto;
+      max-width: 90px;
+      color: rgb(19, 63, 207);
+      font-weight: 700;
       border-radius: 6px;
       font-size: 16px;
     }
     &-buttons {
       text-align: center;
       display: flex;
-      margin-left: auto;
       flex-direction: column;
     }
     a {
