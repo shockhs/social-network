@@ -7,7 +7,19 @@
 .relative-content {
   margin-left: auto;
 }
+.wrapper {
+  position: relative;
+}
 
+.wrapper span {
+  position: absolute;
+  background:rgba(9, 9, 121, 1);
+  padding: 12px;
+  color: #ffffff;
+  font-weight: 700;
+  top: 0;
+  right: 0;
+}
 .section-menu {
   background-color: rgba(24, 22, 38, 0.4);
   &-li {
@@ -40,7 +52,7 @@
   .section-menu {
     width: 100%;
     margin-bottom: 10px;
-    &-li{
+    &-li {
       text-align: center;
     }
   }
