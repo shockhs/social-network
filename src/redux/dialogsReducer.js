@@ -1,7 +1,6 @@
 import { addNewDialog } from "../api/API-dialogs";
 
 const SEND_MESSAGE = "dialogsReducer/SEND-MESSAGE";
-const SET_COUNT = "dialogsReducer/SET-COUNT"
 const SET_MEMBERS_DATA = "dialogsReducer/SET-MEMBERS-DATA";
 
 let initialState = {
@@ -16,10 +15,6 @@ const dialogsReducer = (state = initialState, action) => {
                 messagesData: [...state.messagesData, { id: 1, message: action.text }]
             }
         }
-        case SET_COUNT: {
-            debugger;
-            return { count: action.count }
-        }
         case SET_MEMBERS_DATA: {
             return {
                 ...state, membersData: action.members
@@ -31,7 +26,6 @@ const dialogsReducer = (state = initialState, action) => {
 
 export let addMessageActionCreater = (text) => ({ type: SEND_MESSAGE, text });
 export let setMembersData = (members) => ({ type: SET_MEMBERS_DATA, members });
-export let setNewMessageCount = (count) => ({ type: SET_COUNT, count })
 
 export let addNewDialogsMember = (id) => {
     return async (dispatch) => {
@@ -39,12 +33,6 @@ export let addNewDialogsMember = (id) => {
         if (response.status === 200) {
             //some code
         }
-    }
-}
-export let setNewMessage = (count) => {
-    return (dispatch) => {
-        debugger;
-        dispatch(setNewMessageCount(count))
     }
 }
 

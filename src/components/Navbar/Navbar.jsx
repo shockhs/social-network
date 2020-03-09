@@ -1,5 +1,5 @@
 import React from 'react';
-import '../scss/Navbar/Navbar.scss';
+import '../css/Navbar/Navbar.css';
 import { NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import * as axios from 'axios';
@@ -38,7 +38,7 @@ const Navbar = () => {
                     <li className="section-menu-li"><NavLink className="section-menu-li-url" to="/home/profile">Profile</NavLink></li>
                     {updated
                         ? <>
-                            <div class="wrapper">
+                            <div className="wrapper">
                                 <li className="section-menu-li"><NavLink className="section-menu-li-url" to="/home/dialogs">Messages</NavLink></li>
                                 <span className="updated">{updated}</span>
                             </div>

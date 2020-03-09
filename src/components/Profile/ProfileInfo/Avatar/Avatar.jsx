@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../../scss/Profile/ProfileInfo/Avatar/Avatar.scss';
+import '../../../css/Profile/ProfileInfo/Avatar/Avatar.css';
 import avatar from '../../../../img/default-avatar.png';
 import { Redirect } from 'react-router-dom';
 

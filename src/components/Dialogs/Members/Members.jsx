@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../scss/Dialogs/Members/Members.scss';
+import '../../css/Dialogs/Members/Members.css';
 import Member from './Member/Member';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -51,7 +51,7 @@ const Members = ({ instance }) => {
         };
     }, [updated])
     let mainMembersData = membersList.map((member) => {
-        return <Member count={state.count} key={member.id} id={member.id} name={member.userName} />;
+        return <Member status={member.hasNewMessages} count={member.newMessagesCount} key={member.id} id={member.id} name={member.userName} />;
     });
     return (
         <ul className="section-dialogs-inner-members">
