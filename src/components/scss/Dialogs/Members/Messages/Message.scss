@@ -9,8 +9,15 @@
   white-space: normal;
 }
 
-.activeClass{
+.nopadding {
+  padding: 0;
+}
+
+.activeClass {
   background-color: red;
+}
+.message-paddding-viewed {
+  margin-bottom: 10px;
 }
 
 .pagination-style {
@@ -24,34 +31,113 @@
   }
 }
 
+.row {
+  margin: 0;
+}
+
+.content-message-content {
+  display: flex;
+  padding: 0;
+  flex-direction: column;
+}
+.content-message {
+  display: flex;
+  .col-sm-4 {
+    padding: 0;
+  }
+  &-button-delete {
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: 4px 0 4px 0;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+    color: #ffffff;
+    border: none;
+    background: rgb(190, 21, 21);
+    background: linear-gradient(
+      90deg,
+      rgba(91, 2, 2, 1) 0%,
+      rgba(198, 8, 8, 1) 50%
+    );
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  &-button-delete:hover {
+    background: rgb(170, 40, 40);
+    background: linear-gradient(
+      90deg,
+      rgba(170, 40, 40, 1) 0%,
+      rgba(255, 18, 18, 1) 100%
+    );
+    cursor: pointer;
+  }
+  &-button-restore {
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: 4px 0 4px 0;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 700;
+    color: #ffffff;
+    border: none;
+    background: rgb(113, 8, 199);
+    background: radial-gradient(
+      circle,
+      rgba(113, 8, 199, 1) 0%,
+      rgba(0, 0, 0, 1) 100%
+    );
+    border-radius: 10px;
+    cursor: pointer;
+  }
+}
+
 .section-dialogs {
   &-inner {
     &-active {
+      display: flex;
+      justify-content: column;
       &-message {
         display: flex;
         width: 100%;
         align-items: center;
         padding: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
         background-color: rgba(147, 112, 216, 0.4);
         border-radius: 15px;
+        &-avatar {
+          width: 100%;
+        }
         .row {
           display: flex;
           align-items: center;
         }
-        &-avatar {
-          img {
-            width: 100%;
-          }
-        }
         &-item {
           width: 100%;
+          margin-bottom: 5px;
           word-wrap: break-word;
           color: #ffffff;
         }
       }
     }
   }
+}
+
+.viewed-status {
+  color: red;
+  display: flex;
+  font-weight: 600;
+  margin-bottom: 5px;
+  flex-direction: row-reverse;
+  padding: none;
 }
 
 .MessagesLoader {

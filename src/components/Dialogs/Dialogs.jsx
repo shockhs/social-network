@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import * as axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const instance = axios.create({
     withCredentials: true,
@@ -15,6 +16,19 @@ const instance = axios.create({
 
 const Dialogs = () => {
     let [membersList, setMembersList] = useState([]);
+    let [profile, setProfile] = useState(null);
+    const value = useSelector(state => state.authPage.id);
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await instance.get(`/profile/${value}`);
+            if (response.status === 200) {
+                setProfile(response.data);
+            }
+        }
+        fetchData();
+        return () => {
+        };
+    }, [])
     useEffect(() => {
         const fetchData = async () => {
             const response = await instance.get(`/dialogs`);
@@ -34,7 +48,7 @@ const Dialogs = () => {
                     <div className="col-sm-4">
                         <Members instance={instance} />
                     </div>
-                    <Message instance={instance} membersList={membersList} />
+                    <Message profile={profile} instance={instance} membersList={membersList} />
                 </div>
             </div>
         </BrowserRouter>
