@@ -1,0 +1,124 @@
+import React from 'react';
+import { useState } from 'react';
+import Pagination from 'react-paginating';
+import blocker from '../../../../img/default-avatar.png'
+import Preloader from '../../../commons/Preloader/Preloader';
+
+const ContentMessage = ({ total, userAvatar, avatar, restoreMessage, deleteMessage, setPageCurrent, id, currentPage, mainMessageData }) => {
+    let [currentId, setCurrentId] = useState([]);
+    let handleRestoreClick = (id) => {
+        restoreMessage(id);
+        let array = currentId.map(messages => { if (messages !== id) return messages })
+        setCurrentId(array);
+    }
+    let handleDeleteClick = (id) => {
+        deleteMessage(id);
+        let array = [...currentId, id];
+        setCurrentId(array);
+    }
+    let handlePageChange = (pageCurrent, e) => {
+        setPageCurrent(pageCurrent);
+    }
+    let defaultPage = {
+        backgroundColor: 'rgb(7, 2, 91)',
+        color: '#ffffff',
+        textTransform: 'uppercase'
+    }
+    let numbers = {
+        backgroundColor: '#07025b',
+        fontWeight: '700',
+        color: '#ffffff'
+    }
+    function format(dateStr) {
+        let date = dateStr.split('T');
+        let time = date[1].split(":");
+        return (date[0] + " " + time[0] + ":" + time[1]);
+    }
+    return (
+        <>
+            <Pagination key={'page' + total + currentPage} className="pagination-style" total={total} limit={10} pageCount={10} currentPage={currentPage} >
+                {({ pages, currentPage, hasNextPage, hasPreviousPage, previousPage, nextPage, totalPages, getPageItemProps }) => (
+                    <div>
+                        <button key={'first' + total + currentPage} {...getPageItemProps({ pageValue: 1, style: defaultPage, onPageChange: handlePageChange })}>first</button>
+                        {hasPreviousPage && (<button key={'prev' + total + currentPage} {...getPageItemProps({ pageValue: previousPage, style: numbers, onPageChange: handlePageChange })}>{'<'}</button>)}
+                        {pages.map(page => {
+                            let activePage = null;
+                            if (currentPage === page) {
+                                activePage = { backgroundColor: '#ff4067' };
+                                return (<button key={'active' + page + total + currentPage} {...getPageItemProps({ pageValue: page, style: activePage, onPageChange: handlePageChange })}>{page}</button>);
+                            }
+                            return (<button key={page + total + currentPage} {...getPageItemProps({ pageValue: page, style: activePage, onPageChange: handlePageChange })}>{page}</button>);
+                        })}
+                        {hasNextPage && (<button key={'next' + total + currentPage} {...getPageItemProps({ pageValue: nextPage, style: numbers, onPageChange: handlePageChange })}>{'>'}</button>)}
+                        <button key={'last' + total + currentPage} {...getPageItemProps({ pageValue: totalPages, style: defaultPage, onPageChange: handlePageChange })}>last</button>
+                    </div>
+                )}
+            </Pagination>
+            <div className="row">
+                {mainMessageData !== 0
+                    ? (mainMessageData.map(pages => {
+                        if (pages.id === currentPage) {
+                            return <ul key={pages.id + total + currentPage}>
+                                {pages.item.map((item) => {
+                                    return (item.recipientId === id
+                                        ? <div key={item.id}> <div className="section-dialogs-inner-active-message col-sm-6 col-sm-offset-6">
+                                            <div className="row">
+                                                <div className="content-message">
+                                                    <div className="col-sm-4 content-message-avatar">
+                                                        <img className="img-responsive rounded-circle" src={avatar ? avatar : blocker} alt="" />
+                                                        {(currentId.includes(item.id))
+                                                            ? <button onClick={() => { handleRestoreClick(item.id) }} className="content-message-button-restore">restore</button>
+                                                            : <button onClick={() => { handleDeleteClick(item.id) }} className="content-message-button-delete">delete</button>}
+                                                    </div>
+                                                    <div className="col-sm-8 content-message-text">
+                                                        <div className="section-dialogs-inner-active-message-item center-block">
+                                                            <h5>{item.senderName}</h5>
+                                                            <h6>{format(item.addedAt)}</h6>
+                                                        </div>
+                                                        <div className="section-dialogs-inner-active-message-item center-block">
+                                                            <div className="wrapword">{item.body}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <div className="col-sm-12 nopadding">
+                                                {!item.viewed ? <div className="viewed-status">Не просмотрено</div> : <div className="message-paddding-viewed" />}
+                                            </div></div>
+                                        : <div key={item.id}><div key={item.id} className="section-dialogs-inner-active-message col-sm-6">
+                                            <div className="row">
+                                                <div className="content-message">
+                                                    <div className="col-sm-4 content-message-avatar">
+                                                        <img className="img-responsive rounded-circle" src={userAvatar ? userAvatar : blocker} alt="" />
+                                                        {(currentId.includes(item.id))
+                                                            ? <button onClick={() => { handleRestoreClick(item.id) }} className="content-message-button-restore">restore</button>
+                                                            : <button onClick={() => { handleDeleteClick(item.id) }} className="content-message-button-delete">delete</button>}
+                                                    </div>
+                                                    <div className="col-sm-8 col-centered content-message-text">
+                                                        <div className="section-dialogs-inner-active-message-item center-block">
+                                                            <h5>{item.senderName}</h5>
+                                                            <h6>{format(item.addedAt)}</h6>
+                                                        </div>
+                                                        <div className="section-dialogs-inner-active-message-item center-block">
+                                                            <p className="wrapword">{item.body}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <div className="col-sm-12 nopadding">
+                                                <div className="message-paddding-viewed" />
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </ul>
+                        }
+                    }))
+                    : <Preloader isLoading={true} />
+                }
+            </div>
+        </>);
+}
+
+export default ContentMessage;

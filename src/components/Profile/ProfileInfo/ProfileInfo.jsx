@@ -24,7 +24,7 @@ const ProfileInfo = ({ profile, isLoading, authStatus, addNewDialogsMember }) =>
                     <div className="col-sm-4 section-profile-inner-about-avatar">
                         <AvatarContainer addNewDialogsMember={addNewDialogsMember} id={profile.userId} authStatus={authStatus} photo={profile.photos.large} />
                     </div>
-                    <div className="col-sm-8">
+                    <div className="col-sm-8" >
                         <div className="row">
                             <div className="section-profile-inner-about-description col-sm-12">
                                 <div className="section-profile-inner-about-description-main col-sm-12">

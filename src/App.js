@@ -36,7 +36,7 @@ class App extends React.Component {
     } else {
       renderComponent = <LoginPageContainerLoader />;
     }
-    return <Route path={path} render={() => renderComponent} />
+    return <Route key={path} path={path} render={() => renderComponent} />
   }
 }
 

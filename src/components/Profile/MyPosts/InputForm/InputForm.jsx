@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import Preloader from '../../../commons/Preloader/Preloader';
 
-const InputFormElement = ({ handleSubmit, ...props }) => {
+const InputFormElement = ({ handleSubmit, post }) => {
     return (
         <form onSubmit={handleSubmit}>
             <div className="row">
@@ -28,7 +28,7 @@ const InputFormRedux = reduxForm({ form: "InputForm" })(InputFormElement);
 
 const InputForm = (props) => {
     let [sendStatus, setSendStatus] = useState(false);
-    let postsend = "";
+    let post = { postsend: "" };
     useEffect(() => {
         setTimeout(() => {
             setSendStatus(false);
@@ -44,7 +44,7 @@ const InputForm = (props) => {
             ? <div className="section-users-elements-status"><Preloader isLoading={true} /></div>
             : <div className="section-profile-inner-posts">
                 <div className="section-profile-inner-posts-form">
-                    <InputFormRedux initialValues={postsend} onSubmit={addPost} />
+                    <InputFormRedux initialValues={post} onSubmit={addPost} />
                 </div >
             </div >
         }</>

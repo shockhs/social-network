@@ -32,15 +32,15 @@ class HomePage extends React.Component {
                             <div className="col-sm-8 relative-content">
                                 <div className="section-inner">
                                     <React.Suspense fallback={<PreloaderPage isLoading={true} />}>
-                                        <Route path="/home/dialogs" render={() => <Dialogs />} />
-                                        <Route exact path="/home" render={() => <ProfileContainer />} />
-                                        <Route exact path="/home/profile" render={() => <ProfileContainer />} />
-                                        <Route exact path="/home/users/:userId" render={() => <ProfileContainer />} />
-                                        <Route exact path="/home/users" render={() => <UsersContainer />} />
-                                        <Route exact path="/home/news" component={News} />
-                                        <Route exact path="/home/music" component={Music} />
-                                        <Route exact path="/home/groups" component={Groups} />
-                                        <Route exact path="/home/settings" component={Settings} />
+                                        <Route key={'/home/dialogs'} path="/home/dialogs" render={() => <Dialogs />} />
+                                        <Route key={'/home'} exact path="/home" render={() => <ProfileContainer />} />
+                                        <Route key={'/home/profile'} exact path="/home/profile" render={() => <ProfileContainer />} />
+                                        <Route key={'/home/users/:userId'} exact path="/home/users/:userId" render={() => <ProfileContainer />} />
+                                        <Route key={'/home/users'} exact path="/home/users" render={() => <UsersContainer />} />
+                                        <Route key={'/home/news'} exact path="/home/news" component={News} />
+                                        <Route key={'/home/music'} exact path="/home/music" component={Music} />
+                                        <Route key={'/home/groups'} exact path="/home/groups" component={Groups} />
+                                        <Route key={'/home/settings'} exact path="/home/settings" component={Settings} />
                                     </React.Suspense>
                                 </div>
                             </div>

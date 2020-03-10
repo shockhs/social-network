@@ -1,11 +1,11 @@
 import React from 'react';
 import '../css/Dialogs//Dialogs.css';
 import Members from './Members/Members';
-import Message from './Members/Messages/Message';
+import MessagesContainer from './Members/Messages/MessagesContainer';
 import { BrowserRouter } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import * as axios from 'axios';
+import Axios, * as axios from 'axios';
 import { useSelector } from 'react-redux';
 
 const instance = axios.create({
@@ -19,26 +19,32 @@ const Dialogs = () => {
     let [profile, setProfile] = useState(null);
     const value = useSelector(state => state.authPage.id);
     useEffect(() => {
+        let source = Axios.CancelToken.source(); // axios cancel control
         const fetchData = async () => {
-            const response = await instance.get(`/profile/${value}`);
-            if (response.status === 200) {
-                setProfile(response.data);
+            try {
+                const dialogs = await instance.get(`/dialogs`, {
+                    cancelToken: source.token
+                });
+                const profile = await instance.get(`/profile/${value}`, {
+                    cancelToken: source.token
+                });
+                if (dialogs.status === 200) {
+                    setMembersList(dialogs.data);
+                }
+                if (profile.status === 200) {
+                    setProfile(profile.data);
+                }
+            } catch (error) {
+                if (Axios.isCancel(error)) {
+                    console.log('cancel request Dialogs');
+                } else {
+                    throw error;
+                }
             }
         }
         fetchData();
         return () => {
-        };
-    }, [])
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await instance.get(`/dialogs`);
-            if (response.status === 200) {
-                setMembersList(response.data);
-            }
-        }
-        fetchData();
-        return () => {
-            setMembersList([]);
+            source.cancel();
         };
     }, [])
     return (
@@ -46,9 +52,9 @@ const Dialogs = () => {
             <div className="section-dialogs">
                 <div className="section-dialogs-inner">
                     <div className="col-sm-4">
-                        <Members instance={instance} />
+                        <Members members={membersList} instance={instance} />
                     </div>
-                    <Message profile={profile} instance={instance} membersList={membersList} />
+                    <MessagesContainer profile={profile} instance={instance} membersList={membersList} />
                 </div>
             </div>
         </BrowserRouter>
