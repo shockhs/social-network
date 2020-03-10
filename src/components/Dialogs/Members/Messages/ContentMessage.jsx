@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useState } from 'react';
 import Pagination from 'react-paginating';
 import blocker from '../../../../img/default-avatar.png'
@@ -8,7 +8,7 @@ const ContentMessage = ({ total, userAvatar, avatar, restoreMessage, deleteMessa
     let [currentId, setCurrentId] = useState([]);
     let handleRestoreClick = (id) => {
         restoreMessage(id);
-        let array = currentId.map(messages => { if (messages !== id) return messages })
+        let array = currentId.map(message => { if (message !== id) { return message } else { return null } })
         setCurrentId(array);
     }
     let handleDeleteClick = (id) => {
@@ -61,31 +61,32 @@ const ContentMessage = ({ total, userAvatar, avatar, restoreMessage, deleteMessa
                             return <ul key={pages.id + total + currentPage}>
                                 {pages.item.map((item) => {
                                     return (item.recipientId === id
-                                        ? <div key={item.id}> <div className="section-dialogs-inner-active-message col-sm-6 col-sm-offset-6">
-                                            <div className="row">
-                                                <div className="content-message">
-                                                    <div className="col-sm-4 content-message-avatar">
-                                                        <img className="img-responsive rounded-circle" src={avatar ? avatar : blocker} alt="" />
-                                                        {(currentId.includes(item.id))
-                                                            ? <button onClick={() => { handleRestoreClick(item.id) }} className="content-message-button-restore">restore</button>
-                                                            : <button onClick={() => { handleDeleteClick(item.id) }} className="content-message-button-delete">delete</button>}
-                                                    </div>
-                                                    <div className="col-sm-8 content-message-text">
-                                                        <div className="section-dialogs-inner-active-message-item center-block">
-                                                            <h5>{item.senderName}</h5>
-                                                            <h6>{format(item.addedAt)}</h6>
+                                        ? <Fragment key={item.id}>
+                                            <div className={(item.viewed ? "section-dialogs-inner-active-message col-sm-6 col-sm-offset-6" : "section-dialogs-inner-active-messagenew col-sm-6 col-sm-offset-6")}>
+                                                <div className="row">
+                                                    <div className="content-message">
+                                                        <div className="col-sm-4 content-message-avatar">
+                                                            <img className="img-responsive rounded-circle" src={avatar ? avatar : blocker} alt="" />
+                                                            {(currentId.includes(item.id))
+                                                                ? <button onClick={() => { handleRestoreClick(item.id) }} className="content-message-button-restore">restore</button>
+                                                                : <button onClick={() => { handleDeleteClick(item.id) }} className="content-message-button-delete">delete</button>}
                                                         </div>
-                                                        <div className="section-dialogs-inner-active-message-item center-block">
-                                                            <div className="wrapword">{item.body}</div>
+                                                        <div className="col-sm-8 content-message-text">
+                                                            <div className="section-dialogs-inner-active-message-item center-block">
+                                                                <h5>{item.senderName}</h5>
+                                                                <h6>{format(item.addedAt)}</h6>
+                                                            </div>
+                                                            <div className="section-dialogs-inner-active-message-item center-block">
+                                                                <div className="wrapword">{item.body}</div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
                                             <div className="col-sm-12 nopadding">
                                                 {!item.viewed ? <div className="viewed-status">Не просмотрено</div> : <div className="message-paddding-viewed" />}
-                                            </div></div>
-                                        : <div key={item.id}><div key={item.id} className="section-dialogs-inner-active-message col-sm-6">
+                                            </div></Fragment>
+                                        : <Fragment key={item.id}><div className="section-dialogs-inner-active-message col-sm-6">
                                             <div className="row">
                                                 <div className="content-message">
                                                     <div className="col-sm-4 content-message-avatar">
@@ -109,11 +110,11 @@ const ContentMessage = ({ total, userAvatar, avatar, restoreMessage, deleteMessa
                                             <div className="col-sm-12 nopadding">
                                                 <div className="message-paddding-viewed" />
                                             </div>
-                                        </div>
+                                        </Fragment>
                                     );
                                 })}
                             </ul>
-                        }
+                        } else { return null }
                     }))
                     : <Preloader isLoading={true} />
                 }

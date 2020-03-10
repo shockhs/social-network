@@ -24,9 +24,11 @@ function reducer(state, action) {
 const Members = ({ instance }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     let [membersList, setMembersList] = useState([]);
+/* eslint-disable react-hooks/exhaustive-deps */
     let updateCount = useCallback((number) => {
         dispatch({ type: 'set', number });
     })
+/* eslint-enable react-hooks/exhaustive-deps */
     let source = Axios.CancelToken.source(); // axios cancel method
     const fetchData = async () => {
         try {
@@ -40,7 +42,7 @@ const Members = ({ instance }) => {
                 updateCount(count.data);
             }
             if (dialogs.status === 200) {
-                if (!_.isEqual(membersList,dialogs.data)) {
+                if (!_.isEqual(membersList, dialogs.data)) {
                     setMembersList(dialogs.data);
                 }
             }
@@ -52,15 +54,18 @@ const Members = ({ instance }) => {
             }
         }
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         let isCancelled = true;
         if (isCancelled) setInterval(() => { fetchData(); }, 10000);
         fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         return () => {
             isCancelled = false;
             source.cancel();
         };
     }, [membersList])
+    /* eslint-enable react-hooks/exhaustive-deps */
     let mainMembersData = membersList.map((member) => {
         return <Member status={member.hasNewMessages} count={member.newMessagesCount} key={member.id} id={member.id} name={member.userName} />;
     });

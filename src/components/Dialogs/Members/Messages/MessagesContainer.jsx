@@ -68,7 +68,7 @@ const Messages = ({ id, avatar, instance, userAvatar }) => {
             }
         }
     }
-
+    /* eslint-disable react-hooks/exhaustive-deps */
     const onSubmit = useCallback(async ({ message }) => {
         if (isSending) return
         setIsSending(true)
@@ -76,33 +76,26 @@ const Messages = ({ id, avatar, instance, userAvatar }) => {
             body: message,
             cancelToken: source.token
         });
-        setPage(page); // ?
         setUpdatePage(!updatePage);
         setIsSending(false);
-    }, [isSending, instance]);
-
+    }, [isSending]);
     const restoreMessage = useCallback(async (id) => {
         if (isRestoring) return
         setIsRestoring(true)
-        await instance.put(`/dialogs/messages/${id}/restore`, {
-            cancelToken: source.token
-        });
+        await instance.put(`/dialogs/messages/${id}/restore`);
         setIsRestoring(false);
-    }, [isRestoring, instance]);
-
+    }, [isRestoring]);
     const deleteMessage = useCallback(async (id) => {
         if (isDeleting) return
         setIsDeleting(true)
-        await instance.delete(`/dialogs/messages/${id}`, {
-            cancelToken: source.token
-        });
+        await instance.delete(`/dialogs/messages/${id}`);
         setIsDeleting(false);
     }, [isDeleting]);
-
+    /* eslint-enable react-hooks/exhaustive-deps */
     const setPageCurrent = (page) => {
         setPage(page);
     }
-
+    /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         let isCancelled = true;
         if (isCancelled) setInterval(() => { fetchData(); }, 10000);
@@ -112,7 +105,7 @@ const Messages = ({ id, avatar, instance, userAvatar }) => {
             source.cancel();
         };
     }, [updatePage, page, messagesList]);
-
+    /* eslint-enable react-hooks/exhaustive-deps */
     if (mounted === false) {
         return <div className="MessagesLoader"><Preloader isLoading={true} /></div>
     }
@@ -132,9 +125,7 @@ const MessagesContainer = ({ membersList, instance, profile }) => {
     let mainDialogsData = membersList.map((user) => (<Route key={user.id} path={`/home/dialogs/${user.id}`} render={() => <Messages instance={instance} key={user.id} userAvatar={user.photos.small} avatar={profile.photos.small} id={user.id} />} />));
     return (
         <>
-            <div className="section-dialogs-inner-active">
-                {mainDialogsData}
-            </div>
+            {mainDialogsData}
         </>
     );
 }

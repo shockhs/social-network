@@ -1,6 +1,5 @@
 import React from 'react';
 import '../css/Header/Header.css';
-import logo from '../../img/logoin.png'
 import { NavLink } from 'react-router-dom';
 
 const Header = ({profile,UserLogout}) => {
@@ -9,7 +8,7 @@ const Header = ({profile,UserLogout}) => {
             <div className="container">
                 <div className="section-header">
                     <div className="section-header-logo">
-                        <NavLink to="/home"><img className="img-responsive" src={logo} alt="" /></NavLink>
+                        <NavLink className="logotype-text" to="/home">social-network</NavLink>
                     </div>
                     <div className="section-header-button">
                         <div className="section-header-profile">

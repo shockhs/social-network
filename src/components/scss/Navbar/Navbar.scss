@@ -2,10 +2,12 @@
 
 .fixed-left {
   position: fixed;
+  padding-left: 0;
 }
 
 .relative-content {
   margin-left: auto;
+  padding: 0;
 }
 .wrapper {
   position: relative;

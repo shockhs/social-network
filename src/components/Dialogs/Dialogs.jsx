@@ -18,6 +18,7 @@ const Dialogs = () => {
     let [membersList, setMembersList] = useState([]);
     let [profile, setProfile] = useState(null);
     const value = useSelector(state => state.authPage.id);
+    /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         let source = Axios.CancelToken.source(); // axios cancel control
         const fetchData = async () => {
@@ -47,6 +48,7 @@ const Dialogs = () => {
             source.cancel();
         };
     }, [])
+    /* eslint-enable react-hooks/exhaustive-deps */
     return (
         <BrowserRouter>
             <div className="section-dialogs">
