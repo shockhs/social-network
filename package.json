@@ -55,6 +55,7 @@
     "gulp-csso": "^4.0.1",
     "gulp-react": "^4.0.0",
     "gulp-sass": "^4.0.2",
-    "react-test-renderer": "^16.12.0"
+    "react-test-renderer": "^16.12.0",
+    "redux-devtools-extension": "^2.13.8"
   }
 }

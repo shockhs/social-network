@@ -8,7 +8,6 @@ import { useReducer } from 'react';
 import Axios from 'axios';
 var _ = require("lodash");
 
-
 const initialState = { count: 0 };
 
 function reducer(state, action) {
@@ -20,52 +19,56 @@ function reducer(state, action) {
     }
 }
 
-
 const Members = ({ instance }) => {
+    let source = Axios.CancelToken.source(); // eslint-disable-next-line
     const [state, dispatch] = useReducer(reducer, initialState);
     let [membersList, setMembersList] = useState([]);
-/* eslint-disable react-hooks/exhaustive-deps */
     let updateCount = useCallback((number) => {
         dispatch({ type: 'set', number });
-    })
-/* eslint-enable react-hooks/exhaustive-deps */
-    let source = Axios.CancelToken.source(); // axios cancel method
-    const fetchData = async () => {
-        try {
-            const dialogs = await instance.get(`/dialogs`, {
-                cancelToken: source.token
-            });
-            const count = await instance.get(`/dialogs/messages/new/count`, {
-                cancelToken: source.token
-            });
-            if (count.status === 200) {
-                updateCount(count.data);
-            }
-            if (dialogs.status === 200) {
-                if (!_.isEqual(membersList, dialogs.data)) {
-                    setMembersList(dialogs.data);
+    }, [])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const dialogs = await instance.get(`/dialogs`, {
+                    cancelToken: source.token
+                });
+                const count = await instance.get(`/dialogs/messages/new/count`, {
+                    cancelToken: source.token
+                });
+                let promises = [dialogs, count];
+                let response = await Promise.allSettled(promises);
+                if (response[1].value.status === 200) {
+                    if (count === response[1].value.data) {
+                        updateCount(response[1].value.data);
+                    }
+                    else {
+                        console.log('same Members-count data');
+                    }
+                }
+                if (response[0].value.status === 200) {
+                    if (!_.isEqual(membersList, response[0].value.data)) {
+                        setMembersList(response[0].value.data);
+                    } else {
+                        console.log('same Members data');
+                    }
+                }
+
+            } catch (error) {
+                if (Axios.isCancel(error)) {
+                    console.log('cancel request Members');
+                } else {
+                    throw error;
                 }
             }
-        } catch (error) {
-            if (Axios.isCancel(error)) {
-                console.log('cancel request Members');
-            } else {
-                throw error;
-            }
         }
-    }
-    /* eslint-disable react-hooks/exhaustive-deps */
-    useEffect(() => {
-        let isCancelled = true;
-        if (isCancelled) setInterval(() => { fetchData(); }, 10000);
+        let timer = setInterval(() => { fetchData(); }, 10000);
         fetchData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         return () => {
-            isCancelled = false;
+            clearInterval(timer);
             source.cancel();
-        };
-    }, [membersList])
-    /* eslint-enable react-hooks/exhaustive-deps */
+        };// eslint-disable-next-line
+    }, [membersList, instance, updateCount])
     let mainMembersData = membersList.map((member) => {
         return <Member status={member.hasNewMessages} count={member.newMessagesCount} key={member.id} id={member.id} name={member.userName} />;
     });

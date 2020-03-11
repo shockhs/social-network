@@ -10,12 +10,10 @@ import { useCallback } from 'react';
 import Axios from 'axios';
 var _ = require("lodash");
 
-
 const Messages = ({ id, avatar, instance, userAvatar }) => {
     let [mounted, setMounted] = useState(false); // first render control
-    let [messagesList, setMessagesList] = useState([]); // messagesArray
+    let [messagesList, setMessagesList] = useState({}); // messagesArray
     let [isSending, setIsSending] = useState(false); // control requests status
-    let [updated, setUpdated] = useState(false); // control 2nd page rendering
     let [count, setCount] = useState(0); // total messages count
     let [page, setPage] = useState(1); // control pages
     let [updatePage, setUpdatePage] = useState(false); // refreshing variable 
@@ -29,30 +27,14 @@ const Messages = ({ id, avatar, instance, userAvatar }) => {
             });
             if (response.status === 200) {
                 if (mounted === false) {
-                    let array = [{ id: 1, item: response.data.items }]; // first render with no props
+                    let array = { id: 1, item: response.data.items }; // first render with no props
                     setMessagesList(array); // add first page
                     setCount(response.data.totalCount);
                     setMounted(true);
                 } else {
-                    setCount(response.data.totalCount);
-                    var currentList = messagesList.reduce(
-                        (obj, item) => Object.assign(obj, { [item.id]: item.item }), {}); // create object {page: messages}
-                    if (page > 1) {
-                        if (messagesList.length > 1 && updated === true) {
-                            if (!_.isEqual(response.data.items, currentList[page])) { // another pages
-                                let array = [...messagesList, messagesList[page - 1] = [page, response.data.items]];
-                                setMessagesList(array);
-                            }
-                        } else { // second page need to push without check isEqual
-                            let array = [...messagesList, { id: page, item: response.data.items }];
-                            setMessagesList(array)
-                            setUpdated(true);
-                        }
-                    } else if (!_.isEqual(response.data.items, currentList[page])) { // first page update
-                        let array = [{ id: 1, item: response.data.items }]
+                    if (!_.isEqual(response.data.items, messagesList.item)) { // another pages
+                        let array = { id: page, item: response.data.items };
                         setMessagesList(array);
-                        // setUpdated(false); ???
-                        console.log("STATE UPDATE");
                     } else {
                         console.log("SAME PAGE");
                     }
@@ -61,58 +43,55 @@ const Messages = ({ id, avatar, instance, userAvatar }) => {
         } catch (error) {
             if (Axios.isCancel(error)) {
                 console.log('cancel request Messages');
-            } else if (error === undefined) {
-                console.log('some response error');
             } else {
                 throw error;
             }
         }
     }
-    /* eslint-disable react-hooks/exhaustive-deps */
-    const onSubmit = useCallback(async ({ message }) => {
+    const onSubmit = useCallback(async (formData, userId) => {
         if (isSending) return
         setIsSending(true)
-        await instance.post(`/dialogs/${id}/messages`, {
-            body: message,
-            cancelToken: source.token
-        });
-        setUpdatePage(!updatePage);
-        setIsSending(false);
-    }, [isSending]);
+        await instance.post(`/dialogs/${userId}/messages`, { body: formData.message, cancelToken: source.token });
+        setUpdatePage(updatePage => !updatePage);
+        setIsSending(false);// eslint-disable-next-line
+    }, [isSending, instance]);
     const restoreMessage = useCallback(async (id) => {
         if (isRestoring) return
         setIsRestoring(true)
         await instance.put(`/dialogs/messages/${id}/restore`);
         setIsRestoring(false);
-    }, [isRestoring]);
+    }, [isRestoring, instance]);
     const deleteMessage = useCallback(async (id) => {
         if (isDeleting) return
         setIsDeleting(true)
         await instance.delete(`/dialogs/messages/${id}`);
         setIsDeleting(false);
-    }, [isDeleting]);
-    /* eslint-enable react-hooks/exhaustive-deps */
+    }, [isDeleting, instance]);
     const setPageCurrent = (page) => {
         setPage(page);
     }
-    /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         let isCancelled = true;
-        if (isCancelled) setInterval(() => { fetchData(); }, 10000);
-        fetchData(); // NEED CANCEL TOKEN FOR AXIOS
+        if (isCancelled) { var timer = setInterval(() => { fetchData(); }, 10000) };
+        fetchData();
         return () => {
             isCancelled = false;
             source.cancel();
-        };
+            clearInterval(timer);
+        };// eslint-disable-next-line
     }, [updatePage, page, messagesList]);
-    /* eslint-enable react-hooks/exhaustive-deps */
+    useEffect(() => {
+        return () => {
+            source.cancel();
+        };// eslint-disable-next-line
+    }, []);
     if (mounted === false) {
         return <div className="MessagesLoader"><Preloader isLoading={true} /></div>
     }
     return (
         <div key={"section-dialogs-inner-active"} className="section-dialogs-inner-active">
             <ContentMessage userAvatar={userAvatar} avatar={avatar} id={id} restoreMessage={restoreMessage} setPageCurrent={setPageCurrent} currentPage={page} deleteMessage={deleteMessage} mainMessageData={messagesList} total={count} />
-            <SendMessage onSubmit={onSubmit} />
+            <SendMessage userId={id} onSubmit={onSubmit} />
         </div>
     );
 }

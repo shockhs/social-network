@@ -2,10 +2,7 @@ import React from 'react';
 import '../css/Navbar/Navbar.css';
 import { NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import * as axios from 'axios';
-/*eslint-disable */
-
-//suppress all warnings between comments
+import Axios, * as axios from 'axios';
 
 const instance = axios.create({
     withCredentials: true,
@@ -15,22 +12,35 @@ const instance = axios.create({
 
 const Navbar = () => {
     let [updated, setUpdated] = useState(0);
-    let [mounted, setMounted] = useState(false);
-    let myTimeout = setTimeout(function () {
-        setMounted(!mounted);
-    }, 15000);
     useEffect(() => {
+        let source = Axios.CancelToken.source();
         const fetchNewData = async () => {
-            const response = await instance.get(`/dialogs/messages/new/count`);
-            if (response.status === 200) {
-                setUpdated(response.data);
+            try {
+                const response = await instance.get(`/dialogs/messages/new/count`, {
+                    cancelToken: source.token
+                });
+                if (response.status === 200) {
+                    if (response.data === updated) {
+                        setUpdated(response.data);
+                    }
+                }
+            } catch (error) {
+                if (Axios.isCancel(error)) {
+                    console.log('cancel request Navbar');
+                } else {
+                    throw error;
+                }
             }
         }
+        let timer = setInterval(function () {
+            fetchNewData();
+        }, 15000);
         fetchNewData();
         return () => {
-            clearTimeout(myTimeout);
+            clearInterval(timer);
+            source.cancel();
         };
-    }, [mounted]);
+    }, [updated]);
     return (
         <div className="col-sm-3 fixed-left">
             <nav className="section-menu">
@@ -54,6 +64,5 @@ const Navbar = () => {
         </div >
     );
 }
-/*eslint-enable */
 
 export default Navbar;

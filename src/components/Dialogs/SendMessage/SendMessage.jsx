@@ -20,7 +20,7 @@ const SendMessageForm = ({ handleSubmit, update }) => {
 const SendMessageFormRedux = reduxForm({ form: "SendMessageFormn" })(SendMessageForm);
 
 
-const SendMessage = ({ onSubmit }) => {
+const SendMessage = ({ onSubmit,userId }) => {
     let messageValue = { message: "" }
     let [update, setUpdate] = useState(false);
     useEffect(() => {
@@ -31,7 +31,8 @@ const SendMessage = ({ onSubmit }) => {
         };
     }, [update]);
     let handleSubmitClick = (formData) => {
-        onSubmit(formData);
+        debugger;
+        onSubmit(formData,userId);
         setUpdate(true);
     }
     return (

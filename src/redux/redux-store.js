@@ -1,4 +1,4 @@
-import {createStore,combineReducers, applyMiddleware, compose} from 'redux';
+import {createStore,combineReducers, applyMiddleware} from 'redux';
 import profileReducer from './profileReducer';
 import dialogsReducer from './dialogsReducer';
 import usersReducer from './usersReducer';
@@ -6,6 +6,7 @@ import authReducer from './authReducer';
 import thunkMiddleWare from 'redux-thunk';
 import {reducer as formReducer} from 'redux-form';
 import loginReducer from './loginReducer';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
 let reducersBanch = combineReducers({
     profilePage: profileReducer,
@@ -17,8 +18,7 @@ let reducersBanch = combineReducers({
 });
 
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducersBanch, composeEnhancers(applyMiddleware(thunkMiddleWare)));
+const store = createStore(reducersBanch, composeWithDevTools(applyMiddleware(thunkMiddleWare)));
 
 window.store = store;
 export default store;
