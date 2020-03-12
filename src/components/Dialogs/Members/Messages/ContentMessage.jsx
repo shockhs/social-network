@@ -26,6 +26,7 @@ const ContentMessage = ({ total, userAvatar, avatar, restoreMessage, deleteMessa
     }
     useEffect(() => {
         setUpdate(true);
+        setData(mainMessageData);
         return () => {
         };
     }, [mainMessageData]);
@@ -44,9 +45,6 @@ const ContentMessage = ({ total, userAvatar, avatar, restoreMessage, deleteMessa
         let time = date[1].split(":");
         return (date[0] + " " + time[0] + ":" + time[1]);
     }
-    useEffect(()=>{
-        setData(mainMessageData);
-    }, [mainMessageData])
     return (
         <>
             <Pagination key={'page' + total + currentPage} className="pagination-style" total={total} limit={10} pageCount={10} currentPage={currentPage} >
@@ -125,7 +123,7 @@ const ContentMessage = ({ total, userAvatar, avatar, restoreMessage, deleteMessa
                             );
                         })}
                     </ul>
-                    : <Preloader isLoading={true} />
+                    : <div className="col-sm-2 col-sm-offset-5 MessagesLoaderInner"><Preloader isLoading={true} /></div>
                 }
             </div>
         </>

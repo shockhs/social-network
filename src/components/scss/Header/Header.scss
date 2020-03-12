@@ -1,3 +1,10 @@
+@mixin styleLogo {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 32px;
+}
+
 .section-outer {
   background: rgb(117, 18, 18);
   background: linear-gradient(
@@ -8,10 +15,10 @@
   margin-bottom: 20px;
 }
 .logotype-text {
-  text-transform: uppercase;
-  text-decoration: none;
-  color: #ffffff;
-  font-size: 32px;
+  @include styleLogo;
+}
+.logotype-text:focus {
+  @include styleLogo;
 }
 .logotype-text:hover {
   text-transform: uppercase;

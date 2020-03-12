@@ -1,14 +1,13 @@
 import React from 'react';
 import '../../../css/Dialogs/Members/Messages/Message.css';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import ContentMessage from './ContentMessage'
 import { Route } from 'react-router-dom';
 import SendMessage from '../../SendMessage/SendMessage';
 import Preloader from '../../../commons/Preloader/Preloader';
-import { useCallback } from 'react';
 import Axios from 'axios';
 var _ = require("lodash");
+
 
 const Messages = ({ id, avatar, instance, userAvatar }) => {
     let [mounted, setMounted] = useState(false); // first render control
